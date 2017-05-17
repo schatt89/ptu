@@ -1,0 +1,241 @@
+---
+title: "agression_w_1-2"
+output: html_document
+---
+
+Meta
+
+
+```{r}
+# library(dplyr)
+# agr1 <- read.csv("~/ptu/data/agr1.csv")
+# agr2 <- read.csv("~/ptu/data/agr2.csv")
+
+setwd("~/ptu")
+library(foreign)
+library(magrittr)
+library(dplyr)
+
+agr_action = read.csv("data/agr_action_1-2.csv")
+agr_self = read.csv("data/agr_self_1-2.csv")
+
+```
+
+
+
+```{r}
+# agr1$agr_action = rowMeans(agr1[2:10]) %>% round() %>% as.numeric()
+# agr1$agr_self = rowMeans(agr1[11:12]) %>% round() %>% as.numeric()
+# agr1$agr_action = agr1$agr_action + 1
+# agr1$agr_self = agr1$agr_self + 1
+# agr2$agr_action = rowMeans(agr2[2:10]) %>% round() %>% as.numeric()
+# agr2$agr_self = rowMeans(agr2[11:12]) %>% round() %>% as.numeric()
+# agr2$agr_action = agr2$agr_action + 1
+# agr2$agr_self = agr2$agr_self + 1
+# 
+# agr_self = dplyr::select(agr1, ID_student, agr_self)
+# 
+# agr_self1 = dplyr::select(agr2, ID_student, agr_self)
+# agr_self = dplyr::full_join(agr_self, agr_self1, by = "ID_student")
+# colnames(agr_self)[2:3] <- c("V1", "V2")
+# 
+# agr_action = dplyr::select(agr1, ID_student, agr_action)
+# 
+# agr_action1 = dplyr::select(agr2, ID_student, agr_action)
+# agr_action = dplyr::full_join(agr_action, agr_action1, by = "ID_student")
+# colnames(agr_action)[2:3] <- c("V1", "V2")
+
+# write.csv(agr_action, file = "agr_action_1-2.csv", row.names = F)
+# write.csv(agr_self, file = "agr_self_1-2.csv", row.names = F)
+
+students <- as.data.frame(agr_self$ID_student)
+students$V2 <- agr_self$ID_student
+colnames(students)[1] <- "ID_student"
+meta1 <- read.spss('data/meta1.sav', to.data.frame=T)
+gender <- dplyr::select(meta1, ID_student, sex)
+gender <- right_join(gender, students, by = "ID_student") %>% dplyr::select(-V2)
+gender$sex = as.numeric(gender$sex)
+
+# write.csv(gender, file = "gender_w_1-2.csv", row.names = F)
+```
+
+
+
+```{r}
+# agr_self <- read.csv("~/ptu/data/agr_self_1-2.csv")
+# agr_action <- read.csv("~/ptu/data/agr_action_1-2.csv")
+# gender <- read.csv("~/ptu/data/gender_w_1-2.csv")
+```
+
+
+Networks
+
+```{r}
+
+friends1 = read.table("data/friends1.txt",
+                      header = TRUE,
+                      sep="\t",
+                      fill=FALSE, 
+                      strip.white=TRUE)
+friends2 = read.table("data/friends2.txt",
+                      header = TRUE,
+                      sep="\t",
+                      fill=FALSE, 
+                      strip.white=TRUE)
+
+```
+
+
+
+```{r}
+get_edgelist <- function(dataset) {
+  f1 = na.omit(dplyr::select(dataset, ID_student, f1))
+  colnames(f1)[2] = 'friend'
+  f2 = na.omit(dplyr::select(dataset, ID_student, f2))
+  colnames(f2)[2] = 'friend'
+  f3 = na.omit(dplyr::select(dataset, ID_student, f3))
+  colnames(f3)[2] = 'friend'
+  f4 = na.omit(dplyr::select(dataset, ID_student, f4))
+  colnames(f4)[2] = 'friend'
+  f5 = na.omit(dplyr::select(dataset, ID_student, f5))
+  colnames(f5)[2] = 'friend'
+  f6 = na.omit(dplyr::select(dataset, ID_student, f6))
+  colnames(f6)[2] = 'friend'
+  f7 = na.omit(dplyr::select(dataset, ID_student, f7))
+  colnames(f7)[2] = 'friend'
+  f8 = na.omit(dplyr::select(dataset, ID_student, f8))
+  colnames(f8)[2] = 'friend'
+  f9 = na.omit(dplyr::select(dataset, ID_student, f9))
+  colnames(f9)[2] = 'friend'
+  f10 = na.omit(dplyr::select(dataset, ID_student, f10))
+  colnames(f10)[2] = 'friend'
+  edgelist = rbind(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10)
+  return(edgelist)
+}
+
+
+friends1_edgelist = get_edgelist(friends1)
+friends2_edgelist = get_edgelist(friends2)
+
+
+friends1_edgelist$a = (friends1_edgelist$ID_student %in% students$V2)
+friends1_edgelist$b = (friends1_edgelist$friend %in% students$V2)
+friends1_edgelist = filter(friends1_edgelist, a == T & b == T)
+friends1_edgelist = dplyr::select(friends1_edgelist, -a, -b)
+
+friends2_edgelist$a = (friends2_edgelist$ID_student %in% students$V2)
+friends2_edgelist$b = (friends2_edgelist$friend %in% students$V2)
+friends2_edgelist = filter(friends2_edgelist, a == T & b == T)
+friends2_edgelist = dplyr::select(friends2_edgelist, -a, -b)
+```
+
+```{r}
+library(igraph)
+
+rownames(gender) = gender$ID_student
+gender = gender[-1] %>% as.matrix()
+
+g1 = simplify(graph.data.frame(friends1_edgelist, directed = F), remove.multiple = T, remove.loops = T)
+g2 = simplify(graph.data.frame(friends2_edgelist, directed = F), remove.multiple = T, remove.loops = T)
+
+g12 <- g1 + g2
+g1 = g12 - g2
+g2 = g12 - g1
+
+set.seed(483)
+myLayout <- layout.fruchterman.reingold(g12)
+
+par(mfrow = c(1, 2))
+plot(g1,
+     vertex.color = ifelse(gender == 1, "pink", "darkblue"),
+     vertex.shape = ifelse(gender == 1, "square", "circle"),
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 1")
+plot(g2,
+     vertex.color = ifelse(gender == 1, "pink", "darkblue"),
+     vertex.shape = ifelse(gender == 1, "square", "circle"),
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 2")
+
+```
+
+Siena
+
+```{r}
+
+fr_matrix1 = as.matrix(as_adjacency_matrix(g1))
+fr_matrix2 = as.matrix(as_adjacency_matrix(g2))
+rownames(agr_action) <- agr_action$ID_student
+rownames(agr_self) <- agr_self$ID_student
+agr_action = agr_action[2:3]
+agr_self = agr_self[2:3]
+
+agr_self = as.matrix(agr_self)
+agr_action = as.matrix(agr_action)
+```
+
+
+
+```{r}
+setwd("~/ptu")
+
+sym.min <- function(x)
+{
+# Symmetrizing a square matrix by the minimum
+   tx  <- t(x)
+   return(pmin(x[],tx[]))
+}
+
+fr_matrix1 <- sym.min(fr_matrix1)
+fr_matrix2 <- sym.min(fr_matrix2)
+
+library(RSiena)
+friendship <- sienaNet( array( c( fr_matrix1, fr_matrix2),
+                        dim = c( 63, 63, 2 ) ) )# create dependent variable
+agr_self <- varCovar( agr_self )
+agr_action <- varCovar( agr_action )# create time varying covariate
+
+mydata <- sienaDataCreate( friendship, agr_self, agr_action )# define data
+myeff <- getEffects(mydata)
+print01Report( mydata, modelname = 's50_sym' , myeff)# siena01 for reports
+
+## Step 2: Create objects
+myeff <- getEffects(mydata)
+# Which effects are available for the symmetric network?
+effectsDocumentation(myeff)
+
+# endogeneous control effects: transitivity and 3-cycle effects for the evolution of gossip and of friendship:
+
+myeff <- includeEffects(myeff, transTrip, transRecTrip, name="friendship")
+
+myalgo  <- sienaAlgorithmCreate(projname = "s50_sym")
+myalgo2 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 2)
+myalgo3 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 3)
+myalgo4 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 4)
+myalgo5 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 5)
+myalgo6 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 6)
+
+(ans <- siena07( myalgo, data = mydata, effects = myeff))
+(ans2 <- siena07( myalgo2, data = mydata, effects = myeff))
+(ans3 <- siena07( myalgo3, data = mydata, effects = myeff))
+# In my case, convergence here was not satisfactory; therefore a second try:
+(ans3 <- siena07( myalgo3, data = mydata, effects = myeff, prevAns=ans3))
+(ans4 <- siena07( myalgo4, data = mydata, effects = myeff))
+(ans5 <- siena07( myalgo5, data = mydata, effects = myeff, verbose=TRUE))
+(ans6 <- siena07( myalgo6, data = mydata, effects = myeff))
+
+# For modelType=5, we try another specification:
+myeff5 <- includeEffects(myeff, transTriads, include=FALSE)
+myeff5 <- includeEffects(myeff5, balance)
+myeff5
+(ans5 <- siena07( myalgo5, data = mydata, effects = myeff5))
+```
+
