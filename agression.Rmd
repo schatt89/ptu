@@ -1,0 +1,117 @@
+---
+title: "agression"
+output: html_document
+---
+
+```{r}
+library(foreign)
+
+meta1 <- read.spss('wave1.sav', to.data.frame=T)
+meta2 <- read.spss('wave2.sav', to.data.frame=T)
+meta3 <- read.spss('wave3.sav', to.data.frame=T)
+meta4 <- read.spss('wave4.sav', to.data.frame=T)
+
+```
+
+```{r}
+
+agr11 = dplyr::select(meta1, ID_student, v87.1, v87.2, v87.3, v87.4, v87.5, v87.6, v87.7, v87.8, v87.9, v87.10, v87.11)
+agr22 = dplyr::select(meta2, ID_student, v87.1, v87.2, v87.3, v87.4, v87.5, v87.6, v87.7, v87.8, v87.9, v87.10, v87.11)
+agr33 = dplyr::select(meta3, ID_student, v87.1, v87.2, v87.3, v87.4, v87.5, v87.6, v87.7, v87.8, v87.9, v87.10, v87.11)
+agr44 = dplyr::select(meta4, ID_student, v87.1, v87.2, v87.3, v87.4, v87.5, v87.6, v87.7, v87.8, v87.9, v87.10, v87.11)
+
+```
+
+
+
+```{r}
+agr1[2:12] = lapply(agr1[2:12], droplevels)
+agr2[2:12] = lapply(agr2[2:12], droplevels)
+agr3[2:12] = lapply(agr3[2:12], droplevels)
+agr4[2:12] = lapply(agr4[2:12], droplevels)
+
+agr1[2:12] = lapply(agr1[2:12], as.numeric)
+agr2[2:12] = lapply(agr2[2:12], as.numeric)
+agr3[2:12] = lapply(agr3[2:12], as.numeric)
+agr4[2:12] = lapply(agr4[2:12], as.numeric)
+
+```
+
+```{r}
+
+agr11$ID_student = agr11$ID_student + 1000
+rownames(agr11) = agr11$ID_student
+agr11 = dplyr::select(agr11, -ID_student)
+agr22$ID_student = agr22$ID_student + 2000
+rownames(agr22) = agr22$ID_student
+agr22 = dplyr::select(agr22, -ID_student)
+agr33$ID_student = agr33$ID_student + 3000
+rownames(agr33) = agr33$ID_student
+agr33 = dplyr::select(agr33, -ID_student)
+agr44$ID_student = agr44$ID_student + 4000
+rownames(agr44) = agr44$ID_student
+agr44 = dplyr::select(agr44, -ID_student)
+
+
+agr = rbind(agr11, agr22, agr33, agr44)
+
+agr[1:11] = lapply(agr[1:11], as.numeric)
+
+```
+
+IRT 
+
+```{r}
+agr = as.matrix(agr)
+library(ltm)
+
+
+fit.agr <- grm(agr, constrained = TRUE)
+fit.agr
+
+fit.agr2 <- grm(agr, constrained = FALSE)
+fit.agr2
+
+anova(fit.agr, fit.agr2)
+
+plot(fit.agr2, lwd = 2, cex = 0.8,
+     legend = TRUE, cx = "topright",
+     xlab = "Агрессия", cex.main = 1,
+     cex.lab = 1, cex.axis = 1)
+
+plot(fit.agr2, type = "IIC", lwd = 2,
+     cex = 0.8, legend = TRUE,
+     cx = "topright", xlab = "Агрессия",
+     cex.main = 1, cex.lab = 1, cex.axis = 1)
+
+plot(fit.agr2, type = "IIC", items = 0,
+     lwd = 2, xlab = "Мотивация",
+     cex.main = 1, cex.lab = 1, cex.axis = 1)
+
+```
+
+Factor Analysis
+
+Оптимальное разделение - 2 принципальных компонента. Первый компонент - агрессивное действие, направленное на других, второй компонент (87.10 87.11) - состояние раздражительности.
+
+```{r}
+library(polycor)
+corrr<- hetcor(agr)
+corrr
+corrr <- corrr$correlations
+
+library(corrgram)
+corrgram(corrr)
+
+library(psych)
+fa.parallel(corrr, n.obs=139, fa="both", n.iter=100) #рекомендуется 2 принципальных компонента
+
+fa1<-fa(corrr, nfactors=2, rotate="none", fm="pa", scores = T)
+#factor space
+#factor.plot(fa1)
+#factor structure
+fa.diagram(fa1)
+
+```
+
+
