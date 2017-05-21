@@ -145,6 +145,8 @@ g2 = g12 - g1
 set.seed(483)
 myLayout <- layout.fruchterman.reingold(g12)
 
+V(g2)
+
 par(mfrow = c(1, 2))
 plot(g1,
      vertex.color = ifelse(gender == 1, "pink", "darkblue"),
@@ -166,6 +168,33 @@ plot(g2,
      main = "Network wave 2")
 
 ```
+
+Networks with aggression
+
+```{r}
+par(mfrow = c(1, 2))
+plot(g1,
+     #vertex.shape = ifelse(gender == 1, "square", "circle"),
+     vertex.color = sequential_pal(max(agr_action$V1)),
+     vertex.size = log(agr_self$V1-0.9)+7,
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 1")
+plot(g2,
+     #vertex.shape = ifelse(gender == 1, "square", "circle"),
+     vertex.color = sequential_pal(max(agr_action$V2)),
+     vertex.size = log(agr_self$V2-0.9)+7,
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 2")
+```
+
 
 Siena
 
