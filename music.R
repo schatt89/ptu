@@ -23,10 +23,15 @@ write.csv(music1, file="music1.csv", row.names = F)
 write.csv(music2, file='music2.csv', row.names = F)
 
 
-music1_clean <- read_csv("~/ptu/data/music1-clean.csv")
-music2_clean <- read_csv("~/ptu/data/music2-clean.csv")
+# music1_clean <- read_csv("~/ptu/data/music1-clean.csv")
+# music2_clean <- read_csv("~/ptu/data/music2-clean.csv")
 
-music11_clean <- filter(music1_clean, music2_clean$ID_student %in% music1_clean$ID_student)
+setwd("~/ptu")
+music1_clean <- read_csv("data/music1-clean.csv")
+music2_clean <- read_csv("data/music2-clean.csv")
+
+music11_clean <- dplyr::filter(music1_clean, music1_clean$ID_student %in% students$ID_student)
+music22_clean <- dplyr::filter(music1_clean, music2_clean$ID_student %in% music11_clean$ID_student)
 
 library(reshape2)
 geners1 = dcast(melt(music1_clean,id.vars = "ID_student"),ID_student ~value,fun.aggregate = length)

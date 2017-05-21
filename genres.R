@@ -4,30 +4,30 @@ library(stringr)
 library(tidyr)
 library(readr)
 
-
-geners1 <- read_csv("C:/Users/95sch/Desktop/university/3 курс/курсач/music_ptu/music1-clean.csv")
-geners2 <- read_csv("C:/Users/95sch/Desktop/university/3 курс/курсач/music_ptu/music2-clean.csv")
-
-
-geners1$v1 = as.factor(geners1$v1) 
-geners1$v2 = as.factor(geners1$v2)
-geners1$v3 = as.factor(geners1$v3)
-geners1$v4 = as.factor(geners1$v4)
-geners1$v5 = as.factor(geners1$v5)
-geners1$v6 = as.factor(geners1$v6)
-geners1$v7 = as.factor(geners1$v7)
-geners1$v8 = as.factor(geners1$v8)
-summary(geners1)
+setwd("~/ptu")
+geners1 <- read_csv("data/music1-clean.csv")
+geners2 <- read_csv("data/music2-clean.csv")
 
 
-geners2$v1 = as.factor(geners2$v1)
-geners2$v2 = as.factor(geners2$v2)
-geners2$v3 = as.factor(geners2$v3)
-geners2$v4 = as.factor(geners2$v4)
-geners2$v5 = as.factor(geners2$v5)
-geners2$v6 = as.factor(geners2$v6)
-geners2$v7 = as.factor(geners2$v7)
-summary(geners2)
+# geners1$v1 = as.factor(geners1$v1) 
+# geners1$v2 = as.factor(geners1$v2)
+# geners1$v3 = as.factor(geners1$v3)
+# geners1$v4 = as.factor(geners1$v4)
+# geners1$v5 = as.factor(geners1$v5)
+# geners1$v6 = as.factor(geners1$v6)
+# geners1$v7 = as.factor(geners1$v7)
+# geners1$v8 = as.factor(geners1$v8)
+# summary(geners1)
+# 
+# 
+# geners2$v1 = as.factor(geners2$v1)
+# geners2$v2 = as.factor(geners2$v2)
+# geners2$v3 = as.factor(geners2$v3)
+# geners2$v4 = as.factor(geners2$v4)
+# geners2$v5 = as.factor(geners2$v5)
+# geners2$v6 = as.factor(geners2$v6)
+# geners2$v7 = as.factor(geners2$v7)
+# summary(geners2)
 
 
 geners10 = left_join(geners1, geners2, by = "ID_student")
