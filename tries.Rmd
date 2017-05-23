@@ -1,0 +1,35 @@
+---
+title: "music_lda"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(reshape2)
+library(stringr)
+library(tidyr)
+library(readr)
+
+setwd("~/ptu")
+geners1 <- read_csv("data/music1-clean.csv")
+geners2 <- read_csv("data/music2-clean.csv")
+```
+
+
+```{r}
+for (i in 1:length(geners1$ID_student)) {
+  geners1$ID_student[i] <- str_c(geners1$ID_student[i], "_w1", collapse = "")
+}
+for (i in 1:length(geners2$ID_student)) {
+  geners2$ID_student[i] <- str_c(geners2$ID_student[i], "_w2", collapse = "")
+}
+
+geners = rbind(geners1[,-9], geners2)
+for (i in 2:length(geners)) {
+  apply(geners[i], as.character)
+}
+
+geners$text = geners$v1
+geners$text = str_c(str_replace_na(geners$text, geners$v2), sep = ", ")
+```
+
