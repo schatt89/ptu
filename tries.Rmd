@@ -33,3 +33,10 @@ geners$text = geners$v1
 geners$text = str_c(str_replace_na(geners$text, geners$v2), sep = ", ")
 ```
 
+
+
+```{r}
+music_w1_lda <- read_csv("~/ptu/data/music_w1_lda.csv")
+music_w2_lda <- read_csv("~/ptu/data/music_w2_lda.csv")
+```
+
