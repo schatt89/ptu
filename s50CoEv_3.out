@@ -1,0 +1,431 @@
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 06/06/2017 01:14:35
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 82007.
+Effects object used: myCoEvolutionEff 
+Model Type 2: Forcing model
+Note that the model type requested has been over-ridden
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                12.0015
+  2. eval:  degree (density)                               -1.5094
+  3. eval:  transitive triads                               0.0000
+  4. rate:  rate agr_self_beh period 1                      2.8865
+  5. eval:  behavior agr_self_beh linear shape             -0.0115
+  6. eval:  behavior agr_self_beh quadratic shape           0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           534.0000
+  2. Number of edges                                                    188.0000
+  3. Number of transitive triads                                        137.0000
+  4. Amount of behavioral change                                        101.0000
+  5. beh. agr_self_beh cent. sum                                         -1.5000
+  6. beh. agr_self_beh sum of cent. squares                             214.0806
+
+ 6 parameters, 6 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2316 iterations.
+Parameter estimates based on 1316 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  89.7760  406.4956   0.2209 
+  2.  54.5360  211.9804   0.2573 
+  3. 446.0780 2186.2959   0.2040 
+  4.  -0.8780    8.5676  -0.1025 
+  5.   0.0040   12.4060   0.0003 
+  6.  -1.2084   34.4540  -0.0351 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2316 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship              43.5972  ( 156.2091)
+ 2. eval:  degree (density)                             -1.8261  (   4.2765)
+ 3. eval:  transitive triads                             0.6253  (   5.1883)
+
+Behavior Dynamics
+ 4. rate:  rate agr_self_beh period 1                    7.6200  (  14.2163)
+ 5. eval:  behavior agr_self_beh linear shape           -0.4498  (   0.2020)
+ 6. eval:  behavior agr_self_beh quadratic shape         0.0591  (   0.0317)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+ 24401.283    667.687   -810.092  -2166.811    -28.603     -1.006
+     1.000     18.288    -22.187    -59.325     -0.784     -0.027
+    -1.000     -1.000     26.919     71.904      0.951      0.033
+    -0.976     -0.976      0.975    202.104      2.483      0.058
+    -0.907     -0.908      0.908      0.865      0.041      0.000
+    -0.203     -0.197      0.199      0.128     -0.021      0.001
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 117.63 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 06/06/2017 01:34:24
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 840164.
+Effects object used: myCoEvolutionEff 
+Model Type 2: Forcing model
+Note that the model type requested has been over-ridden
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                12.0015
+  2. eval:  degree (density)                               -1.5094
+  3. eval:  transitive triads                               0.0000
+  4. rate:  rate agr_self_beh period 1                      2.8865
+  5. eval:  behavior agr_self_beh linear shape             -0.0115
+  6. eval:  behavior agr_self_beh quadratic shape           0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           534.0000
+  2. Number of edges                                                    188.0000
+  3. Number of transitive triads                                        137.0000
+  4. Amount of behavioral change                                        101.0000
+  5. beh. agr_self_beh cent. sum                                         -1.5000
+  6. beh. agr_self_beh sum of cent. squares                             214.0806
+
+ 6 parameters, 6 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2669 iterations.
+Parameter estimates based on 1669 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  264.3940  577.5013   0.4578 
+  2.  145.7190  301.4899   0.4833 
+  3. 1137.0350 3299.8453   0.3446 
+  4.    0.1310    9.7636   0.0134 
+  5.    0.5090   12.3490   0.0412 
+  6.    1.1173   35.1723   0.0318 
+
+Good convergence is indicated by the t-ratios being close to zero.
+One or more of the t-statistics are rather large.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2669 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship              42.3608  (   9.5061)
+ 2. eval:  degree (density)                             -1.8226  (   0.3706)
+ 3. eval:  transitive triads                             0.6447  (   0.4520)
+
+Behavior Dynamics
+ 4. rate:  rate agr_self_beh period 1                    7.8092  (   2.0801)
+ 5. eval:  behavior agr_self_beh linear shape           -0.4470  (   0.0840)
+ 6. eval:  behavior agr_self_beh quadratic shape         0.0586  (   0.0334)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+    90.367      0.062     -0.221     -7.253     -0.081      0.170
+     0.017      0.137     -0.167      0.153      0.006      0.001
+    -0.051     -0.994      0.204     -0.190     -0.008     -0.001
+    -0.367      0.199     -0.202      4.327      0.068     -0.027
+    -0.101      0.207     -0.209      0.390      0.007     -0.001
+     0.535      0.073     -0.082     -0.385     -0.523      0.001
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 142.49 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 06/06/2017 01:45:25
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 346254.
+Effects object used: myCoEvolutionEff 
+Model Type 2: Forcing model
+Note that the model type requested has been over-ridden
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                12.0015
+  2. eval:  degree (density)                               -1.5094
+  3. eval:  transitive triads                               0.0000
+  4. rate:  rate agr_self_beh period 1                      2.8865
+  5. eval:  behavior agr_self_beh linear shape             -0.0115
+  6. eval:  behavior agr_self_beh quadratic shape           0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           534.0000
+  2. Number of edges                                                    188.0000
+  3. Number of transitive triads                                        137.0000
+  4. Amount of behavioral change                                        101.0000
+  5. beh. agr_self_beh cent. sum                                         -1.5000
+  6. beh. agr_self_beh sum of cent. squares                             214.0806
+
+ 6 parameters, 6 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2488 iterations.
+Parameter estimates based on 1488 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  341.1740  897.8970   0.3800 
+  2.  185.7950  467.9928   0.3970 
+  3. 2196.8680 7211.3425   0.3046 
+  4.    0.3510    9.3285   0.0376 
+  5.   -0.2910   13.2499  -0.0220 
+  6.    1.2804   36.0201   0.0355 
+
+Good convergence is indicated by the t-ratios being close to zero.
+One or more of the t-statistics are rather large.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2488 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship              59.8416  ( 222.8095)
+ 2. eval:  degree (density)                             -1.7844  (   1.7817)
+ 3. eval:  transitive triads                             0.5710  (   1.6821)
+
+Behavior Dynamics
+ 4. rate:  rate agr_self_beh period 1                    7.9086  (  14.7707)
+ 5. eval:  behavior agr_self_beh linear shape           -0.4529  (   0.4904)
+ 6. eval:  behavior agr_self_beh quadratic shape         0.0607  (   0.1145)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+ 49644.051    394.557   -372.384  -3251.462   -107.672     24.779
+     0.994      3.174     -2.996    -25.888     -0.863      0.196
+    -0.994     -1.000      2.830     24.427      0.815     -0.185
+    -0.988     -0.984      0.983    218.173      7.051     -1.633
+    -0.985     -0.988      0.988      0.973      0.241     -0.055
+     0.971      0.962     -0.962     -0.965     -0.974      0.013
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 205.11 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 06/06/2017 02:13:06
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 230511.
+Effects object used: myCoEvolutionEff 
+Model Type 2: Forcing model
+Note that the model type requested has been over-ridden
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                12.0015
+  2. eval:  degree (density)                               -1.5094
+  3. eval:  transitive triads                               0.0000
+  4. eval:  agr_act_beh                                     0.0000
+  5. eval:  agr_act_beh similarity                          0.0000
+  6. rate:  rate agr_act_beh period 1                       0.7146
+  7. eval:  behavior agr_act_beh linear shape              -0.3921
+  8. eval:  behavior agr_act_beh quadratic shape            0.0000
+  9. eval:  behavior agr_act_beh average alter              0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           534.0000
+  2. Number of edges                                                    188.0000
+  3. Number of transitive triads                                        137.0000
+  4. Sum of degrees x agr_act_beh                                        81.0000
+  5. agr_act_beh similarity                                             -10.9980
+  6. Amount of behavioral change                                         46.0000
+  7. beh. agr_act_beh cent. sum                                         -12.0000
+  8. beh. agr_act_beh sum of cent. squares                               62.5000
+  9. beh. agr_act_beh average alters                                     -1.1917
+
+ 9 parameters, 9 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 2877 iterations.
+Parameter estimates based on 1877 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  15.2940  93.6917   0.1632 
+  2.  35.2470  55.5031   0.6350 
+  3.  53.3970 183.0454   0.2917 
+  4.  11.1680  44.2562   0.2523 
+  5.   0.6130  10.9513   0.0560 
+  6.  -8.5090   5.1570  -1.6500 
+  7.  14.6890   4.6525   3.1572 
+  8.   0.4560  10.5288   0.0433 
+  9.   3.3706   5.3164   0.6340 
+
+Good convergence is indicated by the t-ratios being close to zero.
+One or more of the t-statistics are rather large.
+Convergence of the algorithm is doubtful.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 2877 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship              11.3008  (   3.1372)
+ 2. eval:  degree (density)                             -1.9076  (   0.1071)
+ 3. eval:  transitive triads                             0.9696  (   0.1901)
+ 4. eval:  agr_act_beh                                   0.0365  (   0.6455)
+ 5. eval:  agr_act_beh similarity                       -0.2527  (   2.6674)
+
+Behavior Dynamics
+ 6. rate:  rate agr_act_beh period 1                     1.4414  (   0.4723)
+ 7. eval:  behavior agr_act_beh linear shape            -1.5819  (   5.7862)
+ 8. eval:  behavior agr_act_beh quadratic shape         -0.1814  (   2.0117)
+ 9. eval:  behavior agr_act_beh average alter           -4.1543  (  23.2865)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     9.842     -0.142      0.135     -1.435     -5.763     -0.236    -12.319     -4.408    -50.650
+    -0.422      0.011     -0.014      0.017      0.070      0.014      0.231      0.076      0.936
+     0.227     -0.690      0.036     -0.063     -0.264     -0.032     -0.566     -0.199     -2.286
+    -0.709      0.241     -0.512      0.417      1.707      0.114      3.420      1.219     13.885
+    -0.689      0.244     -0.520      0.991      7.115      0.465     14.141      5.072     57.568
+    -0.159      0.280     -0.357      0.374      0.369      0.223      1.523      0.472      5.957
+    -0.679      0.372     -0.514      0.916      0.916      0.557     33.480     11.364    134.285
+    -0.698      0.352     -0.520      0.939      0.945      0.497      0.976      4.047     46.293
+    -0.693      0.375     -0.516      0.924      0.927      0.542      0.997      0.988    542.263
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 48.86 seconds.

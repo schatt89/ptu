@@ -309,6 +309,7 @@ plot(g2,
 Aggression errorbars
 
 ```{r}
+library(reshape2)
 dfw_long_self <- melt(agr_self,
                  id.vars = "ID_student",
                  measure.vars = c("V1","V2"),
@@ -333,7 +334,6 @@ dfwc = rbind(dfwc_action, dfwc_self)
 dfwc$type = c("action", "action", "self", "self")
 dfwc$type = as.factor(dfwc$type)
 
-par(mfrow = c(1, 2))
 ggplot(dfwc, aes(x=wave, y=value, color = type, group=type)) +
     geom_line() +
     geom_errorbar(width=.1, aes(ymin=value-ci, ymax=value+ci)) +
@@ -363,6 +363,10 @@ agr_action = as.matrix(agr_action)
 
 
 
+
+
+
+
 ```{r}
 setwd("~/ptu")
 
@@ -377,44 +381,113 @@ fr_matrix1 <- sym.min(fr_matrix1)
 fr_matrix2 <- sym.min(fr_matrix2)
 
 library(RSiena)
-friendship <- sienaNet( array( c( fr_matrix1, fr_matrix2),
-                        dim = c( 63, 63, 2 ) ) )# create dependent variable
-agr_self <- varCovar( agr_self )
-agr_action <- varCovar( agr_action )# create time varying covariate
 
-mydata <- sienaDataCreate( friendship, agr_self, agr_action )# define data
-myeff <- getEffects(mydata)
-print01Report( mydata, modelname = 's50_sym' , myeff)# siena01 for reports
+# change of smoking/drinking over time
+apply(agr_self, 2, mean)
+apply(agr_self, 2, sd)
+apply(agr_action, 2, mean)
+apply(agr_action, 2, sd)
 
-## Step 2: Create objects
-myeff <- getEffects(mydata)
-# Which effects are available for the symmetric network?
-effectsDocumentation(myeff)
+################################################################
+##              2. CREATE SIENA OBJECTS              
 
-# endogeneous control effects: transitivity and 3-cycle effects for the evolution of gossip and of friendship:
 
-myeff <- includeEffects(myeff, transTrip, transRecTrip, name="friendship")
+# The friendship network is the first dependent variable
+friendship <- sienaDependent( array( c( fr_matrix1, fr_matrix2 ),
+							dim = c( 90, 90, 2 ) ) )
 
-myalgo  <- sienaAlgorithmCreate(projname = "s50_sym")
-myalgo2 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 2)
-myalgo3 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 3)
-myalgo4 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 4)
-myalgo5 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 5)
-myalgo6 <- sienaAlgorithmCreate(projname = "s50_sym", modelType = 6)
+# Also drinking is modeled as dependent (behavioral) variable
+agr_act_beh <- sienaDependent( agr_action, type = "behavior" )
 
-(ans <- siena07( myalgo, data = mydata, effects = myeff))
-(ans2 <- siena07( myalgo2, data = mydata, effects = myeff))
-(ans3 <- siena07( myalgo3, data = mydata, effects = myeff))
-# In my case, convergence here was not satisfactory; therefore a second try:
-(ans3 <- siena07( myalgo3, data = mydata, effects = myeff, prevAns=ans3))
-(ans4 <- siena07( myalgo4, data = mydata, effects = myeff))
-(ans5 <- siena07( myalgo5, data = mydata, effects = myeff, verbose=TRUE))
-(ans6 <- siena07( myalgo6, data = mydata, effects = myeff))
+# Smoking behavior in wave 1 is defined as a constant covariate
+agr_self_1 <- coCovar( agr_self[ , 1 ] )
 
-# For modelType=5, we try another specification:
-myeff5 <- includeEffects(myeff, transTriads, include=FALSE)
-myeff5 <- includeEffects(myeff5, balance)
-myeff5
-(ans5 <- siena07( myalgo5, data = mydata, effects = myeff5))
+# Define the data set
+myCoEvolutionData <- sienaDataCreate( friendship, agr_self_1, agr_act_beh )
+
+################################################################
+##              3. SPECIFY MODEL
+
+
+myCoEvolutionEff <- getEffects( myCoEvolutionData )
+
+# Run reports to check that data is properly formated and
+# to get some basic descriptives
+
+myCoEvolutionEff
+
+print01Report( myCoEvolutionData, myCoEvolutionEff,
+		   modelname = 's50_3_CoEvinit' )
+
+# Define the effects to include in the coevolution model
+# Start with some structural effects (use the shortnames that you find in
+# effectsDocumentation(myeff) )
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, transTrip, cycle3)
+
+# Include a homophily effect for the constant covariate smoking
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
+                                   interaction1 = "agr_self_2" )
+
+# If we want to parse out whether there is a selection or influence (or both)
+# effect for drinking behaviour,
+# we need to also include sender, receiver and homophily effects
+# of drinking for friendship formation:
+
+myCoEvolutionEff <- includeEffects(myCoEvolutionEff, egoX, altX, simX,
+				   interaction1 = "agr_act_beh" )
+
+# For the influence part, i.e. the effect of the network on behaviour,
+# we specify the following effects:
+# indegree, outdegree and assimilation effects for drinking
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff,
+                                   name = "agr_act_beh",
+                                   avAlt,
+                                   interaction1 = "friendship" )
+
+# Check what effects you have decided to include:
+
+myCoEvolutionEff
+
+################################################################
+##              4. CREATE ALGORITHM
+
+myCoEvAlgorithm <- sienaAlgorithmCreate( projname = 's50CoEv_3' )
+
+################################################################
+##              5. ESTIMATE MODEL
+
+ans <- siena07( myCoEvAlgorithm, data = myCoEvolutionData,
+		effects = myCoEvolutionEff )
+
+# THE RESULTS
+
+# To look at the results, type
+
+ans
+
+# or, somewhat more extensive,
+
+summary(ans)
+
+# Note that the "convergence t-ratio" is the t-ratio for convergence checking,
+# not the t statistic for testing the significance of this effect.
+# (See Section 6.1.2 of the manual.)
+# For good convergence, the t-ratios for convergence
+# all should be less than .1 in absolute value.
+
+# For this small data set, the model for behavior dynamics is over-specified,
+# leading to some very large standard errors.
+# Running a model modified by
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff,
+                                   name = "drinkingbeh", indeg, outdeg,
+                                   interaction1 = "friendship", include = FALSE)
+
+#		(ans <- siena07( myCoEvAlgorithm, data = myCoEvolutionData,
+#						effects = myCoEvolutionEff ))
+
+# without degree effects on behaviour gives better results.
 ```
-
