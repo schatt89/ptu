@@ -1,0 +1,511 @@
+---
+title: "music_agr_w_1-2"
+output: html_document
+---
+
+Meta
+
+```{r}
+
+setwd("~/ptu")
+library(foreign)
+library(magrittr)
+library(dplyr)
+
+agr_action = read.csv("data/agr_action_1-2.csv")
+agr_self = read.csv("data/agr_self_1-2.csv")
+
+library(readr)
+music_w2_lda <- read_csv("~/ptu/data/music_w2_lda.csv")
+music_w1_lda <- read_csv("~/ptu/data/music_w1_lda.csv")
+
+```
+
+Useful functions
+
+```{r}
+normDataWithin <- function(data=NULL, idvar, measurevar, betweenvars=NULL,
+                           na.rm=FALSE, .drop=TRUE) {
+    library(plyr)
+
+    # Measure var on left, idvar + between vars on right of formula.
+    data.subjMean <- ddply(data, c(idvar, betweenvars), .drop=.drop,
+     .fun = function(xx, col, na.rm) {
+        c(subjMean = mean(xx[,col], na.rm=na.rm))
+      },
+      measurevar,
+      na.rm
+    )
+
+    # Put the subject means with original data
+    data <- merge(data, data.subjMean)
+
+    # Get the normalized data in a new column
+    measureNormedVar <- paste(measurevar, "_norm", sep="")
+    data[,measureNormedVar] <- data[,measurevar] - data[,"subjMean"] +
+                               mean(data[,measurevar], na.rm=na.rm)
+
+    # Remove this subject mean column
+    data$subjMean <- NULL
+
+    return(data)
+}
+
+summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+    library(plyr)
+
+    # New version of length which can handle NA's: if na.rm==T, don't count them
+    length2 <- function (x, na.rm=FALSE) {
+        if (na.rm) sum(!is.na(x))
+        else       length(x)
+    }
+
+    # This does the summary. For each group's data frame, return a vector with
+    # N, mean, and sd
+    datac <- ddply(data, groupvars, .drop=.drop,
+      .fun = function(xx, col) {
+        c(N    = length2(xx[[col]], na.rm=na.rm),
+          mean = mean   (xx[[col]], na.rm=na.rm),
+          sd   = sd     (xx[[col]], na.rm=na.rm)
+        )
+      },
+      measurevar
+    )
+
+    # Rename the "mean" column    
+    datac <- rename(datac, c("mean" = measurevar))
+
+    datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+
+    # Confidence interval multiplier for standard error
+    # Calculate t-statistic for confidence interval: 
+    # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+    ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+    datac$ci <- datac$se * ciMult
+
+    return(datac)
+}
+
+summarySEwithin <- function(data=NULL, measurevar, betweenvars=NULL, withinvars=NULL,
+                            idvar=NULL, na.rm=FALSE, conf.interval=.95, .drop=TRUE) {
+
+  # Ensure that the betweenvars and withinvars are factors
+  factorvars <- vapply(data[, c(betweenvars, withinvars), drop=FALSE],
+    FUN=is.factor, FUN.VALUE=logical(1))
+
+  if (!all(factorvars)) {
+    nonfactorvars <- names(factorvars)[!factorvars]
+    message("Automatically converting the following non-factors to factors: ",
+            paste(nonfactorvars, collapse = ", "))
+    data[nonfactorvars] <- lapply(data[nonfactorvars], factor)
+  }
+
+  # Get the means from the un-normed data
+  datac <- summarySE(data, measurevar, groupvars=c(betweenvars, withinvars),
+                     na.rm=na.rm, conf.interval=conf.interval, .drop=.drop)
+
+  # Drop all the unused columns (these will be calculated with normed data)
+  datac$sd <- NULL
+  datac$se <- NULL
+  datac$ci <- NULL
+
+  # Norm each subject's data
+  ndata <- normDataWithin(data, idvar, measurevar, betweenvars, na.rm, .drop=.drop)
+
+  # This is the name of the new column
+  measurevar_n <- paste(measurevar, "_norm", sep="")
+
+  # Collapse the normed data - now we can treat between and within vars the same
+  ndatac <- summarySE(ndata, measurevar_n, groupvars=c(betweenvars, withinvars),
+                      na.rm=na.rm, conf.interval=conf.interval, .drop=.drop)
+
+  # Apply correction from Morey (2008) to the standard error and confidence interval
+  #  Get the product of the number of conditions of within-S variables
+  nWithinGroups    <- prod(vapply(ndatac[,withinvars, drop=FALSE], FUN=nlevels,
+                           FUN.VALUE=numeric(1)))
+  correctionFactor <- sqrt( nWithinGroups / (nWithinGroups-1) )
+
+  # Apply the correction factor
+  ndatac$sd <- ndatac$sd * correctionFactor
+  ndatac$se <- ndatac$se * correctionFactor
+  ndatac$ci <- ndatac$ci * correctionFactor
+
+  # Combine the un-normed means with the normed results
+  merge(datac, ndatac)
+}
+```
+
+Friendship and gender
+
+```{r}
+
+students <- as.data.frame(agr_self$ID_student)
+students$V2 <- agr_self$ID_student
+colnames(students)[1] <- "ID_student"
+meta1 <- read.spss('data/meta1.sav', to.data.frame=T)
+gender <- dplyr::select(meta1, ID_student, sex)
+gender <- right_join(gender, students, by = "ID_student") %>% dplyr::select(-V2)
+gender$sex = as.numeric(gender$sex)
+
+# write.csv(gender, file = "gender_w_1-2.csv", row.names = F)
+
+```
+
+Music
+
+```{r}
+
+music_w1_lda$a = (music_w1_lda$ID_student %in% students$V2)
+music_w1_lda = dplyr::filter(music_w1_lda, a == T)
+music_w1_lda = dplyr::select(music_w1_lda, -X1, -a)
+
+music_w2_lda$a = (music_w2_lda$ID_student %in% students$V2)
+music_w2_lda = dplyr::filter(music_w2_lda, a == T)
+music_w2_lda = dplyr::select(music_w2_lda, -X1, -a)
+
+music_waves <- data.frame(V1 = as.factor(music_w1_lda$first), V2 = as.factor(music_w2_lda$first))
+rownames(music_waves) <- music_w1_lda$ID_student
+
+```
+
+Networks
+
+```{r}
+
+friends1 = read.table("data/friends1.txt",
+                      header = TRUE,
+                      sep="\t",
+                      fill=FALSE, 
+                      strip.white=TRUE)
+friends2 = read.table("data/friends2.txt",
+                      header = TRUE,
+                      sep="\t",
+                      fill=FALSE, 
+                      strip.white=TRUE)
+
+```
+
+Edgelists
+
+```{r}
+get_edgelist <- function(dataset) {
+  f1 = na.omit(dplyr::select(dataset, ID_student, f1))
+  colnames(f1)[2] = 'friend'
+  f2 = na.omit(dplyr::select(dataset, ID_student, f2))
+  colnames(f2)[2] = 'friend'
+  f3 = na.omit(dplyr::select(dataset, ID_student, f3))
+  colnames(f3)[2] = 'friend'
+  f4 = na.omit(dplyr::select(dataset, ID_student, f4))
+  colnames(f4)[2] = 'friend'
+  f5 = na.omit(dplyr::select(dataset, ID_student, f5))
+  colnames(f5)[2] = 'friend'
+  f6 = na.omit(dplyr::select(dataset, ID_student, f6))
+  colnames(f6)[2] = 'friend'
+  f7 = na.omit(dplyr::select(dataset, ID_student, f7))
+  colnames(f7)[2] = 'friend'
+  f8 = na.omit(dplyr::select(dataset, ID_student, f8))
+  colnames(f8)[2] = 'friend'
+  f9 = na.omit(dplyr::select(dataset, ID_student, f9))
+  colnames(f9)[2] = 'friend'
+  f10 = na.omit(dplyr::select(dataset, ID_student, f10))
+  colnames(f10)[2] = 'friend'
+  edgelist = rbind(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10)
+  return(edgelist)
+}
+
+
+friends1_edgelist = get_edgelist(friends1)
+friends2_edgelist = get_edgelist(friends2)
+
+
+friends1_edgelist$a = (friends1_edgelist$ID_student %in% students$V2)
+friends1_edgelist$b = (friends1_edgelist$friend %in% students$V2)
+friends1_edgelist = filter(friends1_edgelist, a == T & b == T)
+friends1_edgelist = dplyr::select(friends1_edgelist, -a, -b)
+
+friends2_edgelist$a = (friends2_edgelist$ID_student %in% students$V2)
+friends2_edgelist$b = (friends2_edgelist$friend %in% students$V2)
+friends2_edgelist = filter(friends2_edgelist, a == T & b == T)
+friends2_edgelist = dplyr::select(friends2_edgelist, -a, -b)
+```
+
+Network with gender
+
+```{r}
+library(igraph)
+
+rownames(gender) = gender$ID_student
+gender = gender[-1] %>% as.matrix()
+
+g1 = simplify(graph.data.frame(friends1_edgelist, directed = F), remove.multiple = T, remove.loops = T)
+g2 = simplify(graph.data.frame(friends2_edgelist, directed = F), remove.multiple = T, remove.loops = T)
+
+g12 <- g1 + g2
+g1 = g12 - g2
+g2 = g12 - g1
+
+set.seed(483)
+myLayout <- layout.fruchterman.reingold(g12)
+
+V(g2)
+
+par(mfrow = c(1, 2))
+plot(g1,
+     vertex.color = ifelse(gender == 1, "pink", "darkblue"),
+     vertex.shape = ifelse(gender == 1, "square", "circle"),
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 1")
+plot(g2,
+     vertex.color = ifelse(gender == 1, "pink", "darkblue"),
+     vertex.shape = ifelse(gender == 1, "square", "circle"),
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 2")
+
+
+```
+
+Networks with geners
+
+```{r}
+par(mfrow = c(1, 2))
+plot(g1,
+     vertex.color = ifelse(music_waves$V1 == 1, "black", ifelse(music_waves$V1 == 2, "red", ifelse(music_waves$V1 == 3, "blue", ifelse(music_waves$V1 == 4, "green", ifelse(music_waves$V1 == 5, "violet", "pink"))))),
+     vertex.size = 5,
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 1")
+plot(g2,
+     vertex.color = ifelse(music_waves$V2 == 1, "black", ifelse(music_waves$V2 == 2, "red", ifelse(music_waves$V2 == 3, "blue", ifelse(music_waves$V2 == 4, "green", ifelse(music_waves$V2 == 5, "violet", "pink"))))),
+     vertex.size = 5,
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 2")
+
+```
+
+Networks with aggression
+
+```{r}
+par(mfrow = c(1, 2))
+plot(g1,
+     #vertex.shape = ifelse(gender == 1, "square", "circle"),
+     vertex.color = sequential_pal(max(agr_action$V1)),
+     vertex.size = log(agr_self$V1-0.9)+7,
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 1")
+plot(g2,
+     #vertex.shape = ifelse(gender == 1, "square", "circle"),
+     vertex.color = sequential_pal(max(agr_action$V2)),
+     vertex.size = log(agr_self$V2-0.9)+7,
+     edge.width = 1,
+     edge.arrow.size = 0.02,
+     vertex.size = 3,
+     vertex.label = "",
+     layout = myLayout,
+     main = "Network wave 2")
+```
+
+Aggression errorbars
+
+```{r}
+library(reshape2)
+dfw_long_self <- melt(agr_self,
+                 id.vars = "ID_student",
+                 measure.vars = c("V1","V2"),
+                 variable.name = "wave")
+dfw_long_self$wave <- as.factor(dfw_long_self$wav)
+dfw_long_action <- melt(agr_action,
+                 id.vars = "ID_student",
+                 measure.vars = c("V1","V2"),
+                 variable.name = "wave")
+dfw_long_action$wave <- as.factor(dfw_long_action$wav)
+
+library(psych)
+dfwc_self <- summarySEwithin(dfw_long_self, measurevar="value", withinvars="wave",
+                        idvar="ID_student", na.rm=FALSE, conf.interval=.95)
+dfwc_action <- summarySEwithin(dfw_long_action, measurevar="value", withinvars="wave",
+                        idvar="ID_student", na.rm=FALSE, conf.interval=.95)
+
+library(ggplot2)
+# Make the graph with the 95% confidence interval
+
+dfwc = rbind(dfwc_action, dfwc_self)
+dfwc$type = c("action", "action", "self", "self")
+dfwc$type = as.factor(dfwc$type)
+
+ggplot(dfwc, aes(x=wave, y=value, color = type, group=type)) +
+    geom_line() +
+    geom_errorbar(width=.1, aes(ymin=value-ci, ymax=value+ci)) +
+    geom_point(shape=21, size=3, fill="white") +
+  ylim(1,2.7) +
+  ggtitle("Aggressive_behavior")
+
+
+```
+
+Siena
+
+```{r}
+
+fr_matrix1 = as.matrix(as_adjacency_matrix(g1))
+fr_matrix2 = as.matrix(as_adjacency_matrix(g2))
+rownames(agr_action) <- agr_action$ID_student
+rownames(agr_self) <- agr_self$ID_student
+agr_action = agr_action[2:3]
+agr_self = agr_self[2:3]
+
+agr_self = as.matrix(agr_self)
+agr_action = as.matrix(agr_action)
+```
+
+
+```{r}
+setwd("~/ptu")
+
+sym.min <- function(x)
+{
+# Symmetrizing a square matrix by the minimum
+   tx  <- t(x)
+   return(pmin(x[],tx[]))
+}
+
+fr_matrix1 <- sym.min(fr_matrix1)
+fr_matrix2 <- sym.min(fr_matrix2)
+
+library(RSiena)
+
+# change of smoking/drinking over time
+apply(agr_self, 2, mean)
+apply(agr_self, 2, sd)
+apply(agr_action, 2, mean)
+apply(agr_action, 2, sd)
+summary(music_waves)
+
+################################################################
+##              2. CREATE SIENA OBJECTS              
+
+
+# The friendship network is the first dependent variable
+friendship <- sienaDependent( array( c( fr_matrix1, fr_matrix2 ),
+							dim = c( 90, 90, 2 ) ) )
+
+# Also drinking is modeled as dependent (behavioral) variable
+agr_act_beh <- sienaDependent( agr_action, type = "behavior" )
+
+# Smoking behavior in wave 1 is defined as a constant covariate
+agr_self_1 <- coCovar( agr_self[ , 1 ] )
+music_waves <- as.data.frame(music_waves)
+music_waves$V1 <- as.numeric(music_waves$V1)
+music_waves$V2 <- as.numeric(music_waves$V2)
+music_1 <- coCovar( music_waves[ , 1 ])
+
+# Define the data set
+myCoEvolutionData <- sienaDataCreate( friendship, agr_self_1, agr_act_beh, music_1)
+
+################################################################
+##              3. SPECIFY MODEL
+
+
+myCoEvolutionEff <- getEffects( myCoEvolutionData )
+
+# Run reports to check that data is properly formated and
+# to get some basic descriptives
+
+myCoEvolutionEff
+
+print01Report( myCoEvolutionData, myCoEvolutionEff,
+		   modelname = 's50_3_CoEvinit' )
+
+# Define the effects to include in the coevolution model
+# Start with some structural effects (use the shortnames that you find in
+# effectsDocumentation(myeff) )
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, transTrip, cycle3)
+
+# Include a homophily effect for the constant covariate smoking
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
+                                   interaction1 = "agr_self_1" )
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
+                                   interaction1 = "music_1" )
+
+# If we want to parse out whether there is a selection or influence (or both)
+# effect for drinking behaviour,
+# we need to also include sender, receiver and homophily effects
+# of drinking for friendship formation:
+
+myCoEvolutionEff <- includeEffects(myCoEvolutionEff, egoX, altX, simX,
+				   interaction1 = "agr_act_beh" )
+
+# For the influence part, i.e. the effect of the network on behaviour,
+# we specify the following effects:
+# indegree, outdegree and assimilation effects for drinking
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff,
+                                   name = "agr_act_beh",
+                                   avAlt,
+                                   interaction1 = "friendship" )
+
+# Check what effects you have decided to include:
+
+myCoEvolutionEff
+
+################################################################
+##              4. CREATE ALGORITHM
+
+myCoEvAlgorithm <- sienaAlgorithmCreate( projname = 's50CoEv_3' )
+
+################################################################
+##              5. ESTIMATE MODEL
+
+ans <- siena07( myCoEvAlgorithm, data = myCoEvolutionData,
+		effects = myCoEvolutionEff )
+
+# THE RESULTS
+
+# To look at the results, type
+
+ans
+
+# or, somewhat more extensive,
+
+summary(ans)
+
+# Note that the "convergence t-ratio" is the t-ratio for convergence checking,
+# not the t statistic for testing the significance of this effect.
+# (See Section 6.1.2 of the manual.)
+# For good convergence, the t-ratios for convergence
+# all should be less than .1 in absolute value.
+
+# For this small data set, the model for behavior dynamics is over-specified,
+# leading to some very large standard errors.
+# Running a model modified by
+
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff,
+                                   name = "drinkingbeh", indeg, outdeg,
+                                   interaction1 = "friendship", include = FALSE)
+
+#		(ans <- siena07( myCoEvAlgorithm, data = myCoEvolutionData,
+#						effects = myCoEvolutionEff ))
+
+# without degree effects on behaviour gives better results.
+```
