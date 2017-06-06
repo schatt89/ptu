@@ -559,3 +559,138 @@ covariance/correlation matrix of X can be found using
 summary(ans) within R, or by using the 'verbose' option in Siena07.
  
 Total computation time 417.07 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 06/06/2017 04:26:00
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 797929.
+Effects object used: myCoEvolutionEff 
+Model Type 2: Forcing model
+Note that the model type requested has been over-ridden
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                12.0015
+  2. eval:  degree (density)                               -1.5094
+  3. eval:  transitive triads                               0.0000
+  4. eval:  agr_self_1 similarity                           0.0000
+  5. eval:  music_1 similarity                              0.0000
+  6. eval:  music_2 similarity                              0.0000
+  7. eval:  agr_act_beh                                     0.0000
+  8. eval:  agr_act_beh similarity                          0.0000
+  9. rate:  rate agr_act_beh period 1                       0.7146
+ 10. eval:  behavior agr_act_beh linear shape              -0.3921
+ 11. eval:  behavior agr_act_beh quadratic shape            0.0000
+ 12. eval:  behavior agr_act_beh average alter              0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           534.0000
+  2. Number of edges                                                    188.0000
+  3. Number of transitive triads                                        137.0000
+  4. agr_self_1 similarity                                              -12.3905
+  5. music_1 similarity                                                  -8.4914
+  6. music_2 similarity                                                   1.2866
+  7. Sum of degrees x agr_act_beh                                        81.0000
+  8. agr_act_beh similarity                                             -10.9980
+  9. Amount of behavioral change                                         46.0000
+ 10. beh. agr_act_beh cent. sum                                         -12.0000
+ 11. beh. agr_act_beh sum of cent. squares                               62.5000
+ 12. beh. agr_act_beh average alters                                     -1.1917
+
+ 12 parameters, 12 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 3160 iterations.
+Parameter estimates based on 2160 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1. 197.3620  571.0341   0.3456 
+  2. 111.0590  297.7523   0.3730 
+  3. 979.2450 3497.9443   0.2799 
+  4.  -7.1354   20.2850  -0.3518 
+  5.  -2.5712   16.1870  -0.1588 
+  6.   0.3684   14.4603   0.0255 
+  7.  62.0320  150.5123   0.4121 
+  8.  -8.1487   21.7883  -0.3740 
+  9.   0.1160    5.4124   0.0214 
+ 10.   8.0700    5.4972   1.4680 
+ 11.  -2.5160   11.6398  -0.2162 
+ 12.   3.3604    5.2648   0.6383 
+
+Good convergence is indicated by the t-ratios being close to zero.
+One or more of the t-statistics are rather large.
+Convergence of the algorithm is doubtful.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 3160 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship              54.4725  (  56.0737)
+ 2. eval:  degree (density)                             -1.7796  (   0.5264)
+ 3. eval:  transitive triads                             0.5608  (   0.4654)
+ 4. eval:  agr_self_1 similarity                        -0.2503  (   0.2521)
+ 5. eval:  music_1 similarity                           -0.1922  (   0.5330)
+ 6. eval:  music_2 similarity                            0.0682  (   0.9365)
+ 7. eval:  agr_act_beh                                  -0.1669  (   1.0795)
+ 8. eval:  agr_act_beh similarity                       -1.0353  (   2.1719)
+
+Behavior Dynamics
+ 9. rate:  rate agr_act_beh period 1                     2.4502  (   2.0536)
+10. eval:  behavior agr_act_beh linear shape           -12.7936  ( 475.7747)
+11. eval:  behavior agr_act_beh quadratic shape         -0.2425  (   0.8132)
+12. eval:  behavior agr_act_beh average alter          -27.5690  ( 953.2128)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+  3144.265     27.613    -23.130      4.673     22.459    -50.402    -56.321   -101.004     89.889 -22166.000    -39.654 -44498.067
+     0.936      0.277     -0.241      0.052      0.202     -0.464     -0.519     -0.979      0.859   -178.806     -0.375   -359.421
+    -0.886     -0.982      0.217     -0.051     -0.151      0.403      0.425      0.831     -0.759    130.473      0.324    262.624
+     0.331      0.390     -0.437      0.064     -0.007     -0.101     -0.062     -0.141      0.223      1.097     -0.056      1.781
+     0.751      0.720     -0.609     -0.052      0.284     -0.331     -0.479     -0.802      0.526   -227.916     -0.274   -456.707
+    -0.960     -0.942      0.924     -0.426     -0.663      0.877      0.873      1.625     -1.535    308.852      0.656    620.780
+    -0.930     -0.914      0.845     -0.229     -0.833      0.863      1.165      2.212     -1.795    435.144      0.691    872.914
+    -0.829     -0.856      0.822     -0.258     -0.693      0.799      0.944      4.717     -3.885    674.874      1.254   1354.785
+     0.781      0.794     -0.794      0.431      0.480     -0.798     -0.810     -0.871      4.217   -445.680     -1.011   -895.987
+    -0.831     -0.714      0.589      0.009     -0.899      0.693      0.847      0.653     -0.456 226361.540    269.550 453510.590
+    -0.870     -0.877      0.855     -0.272     -0.632      0.861      0.787      0.710     -0.605      0.697      0.661    542.206
+    -0.833     -0.716      0.592      0.007     -0.899      0.695      0.848      0.654     -0.458      1.000      0.699 908614.599
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 298.86 seconds.

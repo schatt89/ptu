@@ -417,9 +417,10 @@ music_waves <- as.data.frame(music_waves)
 music_waves$V1 <- as.numeric(music_waves$V1)
 music_waves$V2 <- as.numeric(music_waves$V2)
 music_1 <- coCovar( music_waves[ , 1 ])
+music_2 <- coCovar( music_waves[ , 2 ])
 
 # Define the data set
-myCoEvolutionData <- sienaDataCreate( friendship, agr_self_1, agr_act_beh, music_1)
+myCoEvolutionData <- sienaDataCreate( friendship, agr_self_1, agr_act_beh, music_1, music_2)
 
 ################################################################
 ##              3. SPECIFY MODEL
@@ -447,7 +448,8 @@ myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
                                    interaction1 = "agr_self_1" )
 myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
                                    interaction1 = "music_1" )
-
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
+                                   interaction1 = "music_2" )
 # If we want to parse out whether there is a selection or influence (or both)
 # effect for drinking behaviour,
 # we need to also include sender, receiver and homophily effects

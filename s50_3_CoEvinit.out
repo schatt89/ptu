@@ -6,7 +6,7 @@ Filename is s50_3_CoEvinit.out.
 
 This file contains primary output for SIENA project <<s50_3_CoEvinit>>.
 
-Date and time: 06/06/2017 4:02:20 AM 
+Date and time: 06/06/2017 4:25:12 AM 
 
 SIENA version 1.1-232 (18 06 2013)
 
@@ -19,7 +19,7 @@ Data input.
 1 dependent network variables,
 0 dependent bipartite variables,
 1 dependent behavior variables,
-2 constant actor covariates,
+3 constant actor covariates,
 0 exogenous changing actor covariates,
 0 constant dyadic covariates,
 0 exogenous changing dyadic covariates,
@@ -97,20 +97,23 @@ agr_act_beh        1.633     1.367       1.5
 Reading constant actor covariates.
 ----------------------------------
 
-2 variables, named:
+3 variables, named:
 agr_self_1      
 music_1         
+music_2         
 
-A total of 2 non-changing individual covariates.
+A total of 3 non-changing individual covariates.
 
 Number of missing cases:
 agr_self_1      0 	( 0.0 %)
 music_1         0 	( 0.0 %)
+music_2         0 	( 0.0 %)
 
 Information about covariates:
                minimum  maximum	  mean 
 agr_self_1      1.0     7.0      2.311 
 music_1         1.0     6.0      3.467 
+music_2         1.0     6.0      3.589 
 The mean values are subtracted from the covariates.
 
 
@@ -124,6 +127,7 @@ the mean is subtracted.
 These means are:
 Similarity agr_self_1   :       0.7351 
 Similarity music_1      :       0.6779 
+Similarity music_2      :       0.6370 
 Similarity agr_act_beh  :       0.8197 
 
 For the distance-2 similarity variable calculated from each actor 
@@ -133,6 +137,8 @@ Distance-2 Similarity agr_self_1  :  friendship
                                          0.8130
 Distance-2 Similarity music_1     :  friendship
                                          0.8039
+Distance-2 Similarity music_2     :  friendship
+                                         0.7571
 Distance-2 Similarity agr_act_beh :friendship  
                                          0.8618
 
