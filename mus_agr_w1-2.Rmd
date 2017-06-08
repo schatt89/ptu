@@ -148,7 +148,11 @@ gender <- dplyr::select(meta1, ID_student, sex)
 gender <- right_join(gender, students, by = "ID_student") %>% dplyr::select(-V2)
 gender$sex = as.numeric(gender$sex)
 
-# write.csv(gender, file = "gender_w_1-2.csv", row.names = F)
+students$value <- 0
+full_list <- spread(students, V2, value = value, fill = 0)
+rownames(full_list) <- full_list$ID_student
+full_list <- dplyr::select(full_list, - ID_student)
+full_list = as.matrix(full_list)
 
 ```
 
@@ -221,13 +225,36 @@ friends2_edgelist = get_edgelist(friends2)
 
 friends1_edgelist$a = (friends1_edgelist$ID_student %in% students$V2)
 friends1_edgelist$b = (friends1_edgelist$friend %in% students$V2)
-friends1_edgelist = filter(friends1_edgelist, a == T & b == T)
+friends1_edgelist = dplyr::filter(friends1_edgelist, a == T & b == T)
 friends1_edgelist = dplyr::select(friends1_edgelist, -a, -b)
 
 friends2_edgelist$a = (friends2_edgelist$ID_student %in% students$V2)
 friends2_edgelist$b = (friends2_edgelist$friend %in% students$V2)
-friends2_edgelist = filter(friends2_edgelist, a == T & b == T)
+friends2_edgelist = dplyr::filter(friends2_edgelist, a == T & b == T)
 friends2_edgelist = dplyr::select(friends2_edgelist, -a, -b)
+
+library(tidyr)
+friends1_edgelist$value <- 1
+fr1 = spread(friends1_edgelist, friend, value = value, fill = 0)
+rownames(fr1) <- fr1$ID_student
+fr1 = dplyr::select(fr1, -ID_student)
+fr1 = as.matrix(fr1)
+
+friends2_edgelist$value <- 1
+fr2 = spread(friends2_edgelist[-154,], friend, value = value, fill = 0)
+rownames(fr2) <- fr2$ID_student
+fr2 = dplyr::select(fr2, -ID_student)
+fr2 = as.matrix(fr2)
+
+full_list2 = full_list
+
+cols <- colnames(full_list)[colnames(full_list) %in% colnames(fr1)]
+rows <- rownames(full_list)[rownames(full_list) %in% rownames(fr1)]
+full_list[rows, cols] <- fr1[rows, cols]
+
+cols <- colnames(full_list2)[colnames(full_list2) %in% colnames(fr2)]
+rows <- rownames(full_list2)[rownames(full_list2) %in% rownames(fr2)]
+full_list2[rows, cols] <- fr2[rows, cols]
 ```
 
 Network with gender
@@ -238,17 +265,12 @@ library(igraph)
 rownames(gender) = gender$ID_student
 gender = gender[-1] %>% as.matrix()
 
-g1 = simplify(graph.data.frame(friends1_edgelist, directed = F), remove.multiple = T, remove.loops = T)
-g2 = simplify(graph.data.frame(friends2_edgelist, directed = F), remove.multiple = T, remove.loops = T)
-
-g12 <- g1 + g2
-g1 = g12 - g2
-g2 = g12 - g1
+g1 = graph_from_adjacency_matrix(full_list)
+g2 = graph_from_adjacency_matrix(full_list2)
+g12 = graph_from_adjacency_matrix((full_list + full_list2) > 0) 
 
 set.seed(483)
 myLayout <- layout.fruchterman.reingold(g12)
-
-V(g2)
 
 par(mfrow = c(1, 2))
 plot(g1,
@@ -365,9 +387,6 @@ ggplot(dfwc, aes(x=wave, y=value, color = type, group=type)) +
 Siena
 
 ```{r}
-
-fr_matrix1 = as.matrix(as_adjacency_matrix(g1))
-fr_matrix2 = as.matrix(as_adjacency_matrix(g2))
 rownames(agr_action) <- agr_action$ID_student
 rownames(agr_self) <- agr_self$ID_student
 agr_action = agr_action[2:3]
@@ -381,15 +400,16 @@ agr_action = as.matrix(agr_action)
 ```{r}
 setwd("~/ptu")
 
-sym.min <- function(x)
-{
-# Symmetrizing a square matrix by the minimum
-   tx  <- t(x)
-   return(pmin(x[],tx[]))
-}
+# sym.min <- function(x)
+# {
+# # Symmetrizing a square matrix by the minimum
+#    tx  <- t(x)
+#    return(pmin(x[],tx[]))
+# }
+# 
+# fr_matrix1 <- sym.min(full_list)
+# fr_matrix2 <- sym.min(full_list2)
 
-fr_matrix1 <- sym.min(fr_matrix1)
-fr_matrix2 <- sym.min(fr_matrix2)
 
 library(RSiena)
 
@@ -405,7 +425,7 @@ summary(music_waves)
 
 
 # The friendship network is the first dependent variable
-friendship <- sienaDependent( array( c( fr_matrix1, fr_matrix2 ),
+friendship <- sienaDependent( array( c( full_list, full_list2 ),
 							dim = c( 90, 90, 2 ) ) )
 
 # Also drinking is modeled as dependent (behavioral) variable
@@ -444,18 +464,18 @@ myCoEvolutionEff <- includeEffects( myCoEvolutionEff, transTrip, cycle3)
 
 # Include a homophily effect for the constant covariate smoking
 
-myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, egoX, altX, simX,
                                    interaction1 = "agr_self_1" )
-myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, egoX, altX, sameXRecip, 
                                    interaction1 = "music_1" )
-myCoEvolutionEff <- includeEffects( myCoEvolutionEff, simX,
+myCoEvolutionEff <- includeEffects( myCoEvolutionEff, egoX, altX, sameXRecip,
                                    interaction1 = "music_2" )
 # If we want to parse out whether there is a selection or influence (or both)
 # effect for drinking behaviour,
 # we need to also include sender, receiver and homophily effects
 # of drinking for friendship formation:
 
-myCoEvolutionEff <- includeEffects(myCoEvolutionEff, egoX, altX, simX,
+myCoEvolutionEff <- includeEffects(myCoEvolutionEff, egoX, altX, simX, sameXRecip,
 				   interaction1 = "agr_act_beh" )
 
 # For the influence part, i.e. the effect of the network on behaviour,
@@ -464,7 +484,7 @@ myCoEvolutionEff <- includeEffects(myCoEvolutionEff, egoX, altX, simX,
 
 myCoEvolutionEff <- includeEffects( myCoEvolutionEff,
                                    name = "agr_act_beh",
-                                   avAlt,
+                                   avAlt, indeg, outdeg, sameX,
                                    interaction1 = "friendship" )
 
 # Check what effects you have decided to include:
@@ -488,9 +508,10 @@ ans <- siena07( myCoEvAlgorithm, data = myCoEvolutionData,
 
 ans
 
-# or, somewhat more extensive,
+# or, somewhat mo
+# re extensive,
 
-summary(ans)
+xtable(ans, file="ans1.htm", type="html")
 
 # Note that the "convergence t-ratio" is the t-ratio for convergence checking,
 # not the t statistic for testing the significance of this effect.
@@ -503,11 +524,13 @@ summary(ans)
 # Running a model modified by
 
 myCoEvolutionEff <- includeEffects( myCoEvolutionEff,
-                                   name = "drinkingbeh", indeg, outdeg,
+                                   name = "agr_act_beh", indeg, outdeg,
                                    interaction1 = "friendship", include = FALSE)
 
-#		(ans <- siena07( myCoEvAlgorithm, data = myCoEvolutionData,
-#						effects = myCoEvolutionEff ))
+(ans <- siena07( myCoEvAlgorithm, data = myCoEvolutionData,
+					effects = myCoEvolutionEff ))
 
+summary(ans)
+xtable(ans, file="ans2.htm", type="html")
 # without degree effects on behaviour gives better results.
 ```

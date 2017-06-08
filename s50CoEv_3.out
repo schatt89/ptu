@@ -694,3 +694,771 @@ covariance/correlation matrix of X can be found using
 summary(ans) within R, or by using the 'verbose' option in Siena07.
  
 Total computation time 298.86 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 08/06/2017 20:15:31
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 922061.
+Effects object used: myCoEvolutionEff 
+Model Type 1: Standard actor-oriented model
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                 5.4847
+  2. eval:  outdegree (density)                            -1.5294
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  3-cycles                                        0.0000
+  6. eval:  agr_self_1 alter                                0.0000
+  7. eval:  agr_self_1 ego                                  0.0000
+  8. eval:  agr_self_1 similarity                           0.0000
+  9. eval:  music_1 alter                                   0.0000
+ 10. eval:  music_1 ego                                     0.0000
+ 11. eval:  music_1 similarity                              0.0000
+ 12. eval:  music_2 alter                                   0.0000
+ 13. eval:  music_2 ego                                     0.0000
+ 14. eval:  music_2 similarity                              0.0000
+ 15. eval:  agr_act_beh alter                               0.0000
+ 16. eval:  agr_act_beh ego                                 0.0000
+ 17. eval:  agr_act_beh similarity                          0.0000
+ 18. rate:  rate agr_act_beh period 1                       0.7146
+ 19. eval:  behavior agr_act_beh linear shape              -0.3921
+ 20. eval:  behavior agr_act_beh quadratic shape            0.0000
+ 21. eval:  behavior agr_act_beh indegree                   0.0000
+ 22. eval:  behavior agr_act_beh outdegree                  0.0000
+ 23. eval:  behavior agr_act_beh average alter              0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           244.0000
+  2. Number of ties                                                     286.0000
+  3. Number of reciprocated ties                                        196.0000
+  4. Number of transitive triplets                                      453.0000
+  5. 3-cycles                                                           129.0000
+  6. Sum of indegrees x agr_self_1                                       55.0222
+  7. Sum of outdegrees x agr_self_1                                      25.0222
+  8. Similarity on agr_self_1                                            -3.8999
+  9. Sum of indegrees x music_1                                         -52.4667
+ 10. Sum of outdegrees x music_1                                        -14.4667
+ 11. Similarity on music_1                                               -5.4801
+ 12. Sum of indegrees x music_2                                         -55.4222
+ 13. Sum of outdegrees x music_2                                        -17.4222
+ 14. Similarity on music_2                                                7.4169
+ 15. Sum of indegrees x agr_act_beh                                      30.0000
+ 16. Sum of outdegrees x agr_act_beh                                     17.0000
+ 17. Similarity on agr_act_beh                                            9.3728
+ 18. Amount of behavioral change                                         46.0000
+ 19. beh. agr_act_beh cent. sum                                         -12.0000
+ 20. beh. agr_act_beh sum of cent. squares                               62.5000
+ 21. beh. agr_act_beh indegrees                                         -64.0000
+ 22. beh. agr_act_beh outdegrees                                        -53.0000
+ 23. beh. agr_act_beh average alters                                     10.2119
+
+ 23 parameters, 23 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 4131 iterations.
+Parameter estimates based on 3131 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -0.4740  15.1693  -0.0312 
+  2.   0.2780  22.8273   0.0122 
+  3.   0.3420  19.1315   0.0179 
+  4.  -4.0660  99.6809  -0.0408 
+  5.  -0.8330  29.3749  -0.0284 
+  6.   0.3485  24.5954   0.0142 
+  7.  -0.1905  23.0963  -0.0082 
+  8.  -0.0409   3.8480  -0.0106 
+  9.   0.4773  20.3801   0.0234 
+ 10.  -0.3427  22.1820  -0.0155 
+ 11.  -0.0629   4.1470  -0.0152 
+ 12.   1.5433  22.7058   0.0680 
+ 13.  -0.6927  23.6086  -0.0293 
+ 14.   0.0081   4.6681   0.0017 
+ 15.   1.3410  15.0493   0.0891 
+ 16.   0.9960  13.7987   0.0722 
+ 17.  -0.2501   3.5310  -0.0708 
+ 18.  -0.0520   4.8971  -0.0106 
+ 19.   0.0900   7.0619   0.0127 
+ 20.   0.1060  17.4027   0.0061 
+ 21.   1.2070  18.4265   0.0655 
+ 22.  -0.5920  22.2764  -0.0266 
+ 23.   0.6492  10.1966   0.0637 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 4131 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship               7.4353  (   0.8030)
+ 2. eval:  outdegree (density)                          -3.0751  (   0.1617)
+ 3. eval:  reciprocity                                   2.9025  (   0.2409)
+ 4. eval:  transitive triplets                           0.8270  (   0.1110)
+ 5. eval:  3-cycles                                     -0.8339  (   0.2087)
+ 6. eval:  agr_self_1 alter                              0.0516  (   0.0533)
+ 7. eval:  agr_self_1 ego                               -0.0278  (   0.0570)
+ 8. eval:  agr_self_1 similarity                        -0.2244  (   0.3404)
+ 9. eval:  music_1 alter                                -0.0971  (   0.0597)
+10. eval:  music_1 ego                                  -0.0732  (   0.0660)
+11. eval:  music_1 similarity                           -0.5150  (   0.2742)
+12. eval:  music_2 alter                                -0.0128  (   0.0557)
+13. eval:  music_2 ego                                   0.0733  (   0.0591)
+14. eval:  music_2 similarity                            0.2424  (   0.2543)
+15. eval:  agr_act_beh alter                             0.2044  (   0.2151)
+16. eval:  agr_act_beh ego                               0.0180  (   0.2106)
+17. eval:  agr_act_beh similarity                        1.6216  (   1.1600)
+Behavior Dynamics
+
+18. rate:  rate agr_act_beh period 1                     2.1817  (   0.5522)
+19. eval:  behavior agr_act_beh linear shape            -1.3507  (   1.1116)
+20. eval:  behavior agr_act_beh quadratic shape          0.1687  (   0.3925)
+21. eval:  behavior agr_act_beh indegree                -1.4883  (   2.5213)
+22. eval:  behavior agr_act_beh outdegree                0.8318  (   1.3590)
+23. eval:  behavior agr_act_beh average alter            1.4824  (   2.0265)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.645      0.045     -0.057     -0.020      0.049     -0.011      0.001      0.008      0.002      0.007      0.047      0.001     -0.009     -0.053     -0.013     -0.028     -0.268      0.021     -0.083     -0.050     -0.237      0.176      0.334
+     0.346      0.026     -0.027     -0.012      0.019     -0.002      0.000     -0.003      0.000      0.002      0.008      0.000     -0.002     -0.011     -0.011     -0.008     -0.101      0.000     -0.039      0.002      0.008      0.010      0.027
+    -0.296     -0.681      0.058      0.016     -0.036      0.002      0.000     -0.009      0.000     -0.002     -0.007      0.000      0.002      0.009      0.008      0.001      0.036     -0.011      0.030      0.017      0.016     -0.026     -0.082
+    -0.219     -0.663      0.614      0.012     -0.021      0.001      0.000     -0.002      0.000     -0.001     -0.003      0.000      0.001      0.006      0.006      0.000      0.016     -0.004      0.016      0.004      0.002     -0.011     -0.019
+     0.293      0.572     -0.713     -0.887      0.044     -0.002     -0.001      0.004     -0.001      0.002      0.006      0.000     -0.001     -0.011     -0.005     -0.004     -0.034     -0.004     -0.039     -0.010     -0.095      0.067      0.112
+    -0.267     -0.235      0.167      0.100     -0.174      0.003      0.000      0.007      0.000      0.000     -0.001      0.000      0.000      0.003     -0.002      0.003      0.010      0.005      0.009      0.000      0.021     -0.013     -0.017
+     0.011     -0.021     -0.034      0.077     -0.115      0.043      0.003      0.007      0.000      0.001      0.001      0.000      0.000      0.001      0.000      0.000      0.003      0.006      0.002      0.000      0.039     -0.020     -0.026
+     0.028     -0.055     -0.110     -0.053      0.059      0.393      0.338      0.116      0.000      0.001      0.002     -0.002      0.002      0.011      0.004      0.009      0.054      0.007     -0.023     -0.016     -0.067      0.042      0.095
+     0.046      0.023     -0.025      0.037     -0.042      0.017      0.019      0.010      0.004     -0.001      0.002     -0.002      0.001     -0.001      0.002      0.000      0.004     -0.002      0.003      0.000     -0.019      0.009      0.010
+     0.131      0.211     -0.128     -0.191      0.125     -0.090      0.184      0.052     -0.130      0.004      0.004      0.001     -0.002     -0.002     -0.002      0.002     -0.003      0.004     -0.001     -0.005      0.041     -0.017     -0.010
+     0.215      0.170     -0.102     -0.096      0.102     -0.078      0.050      0.022      0.101      0.227      0.075     -0.001     -0.001     -0.018      0.003     -0.002     -0.018     -0.021     -0.030     -0.004     -0.121      0.069      0.104
+     0.024      0.049     -0.002     -0.014     -0.035     -0.045      0.120     -0.117     -0.503      0.176     -0.061      0.003     -0.001      0.000     -0.003      0.001      0.000      0.007      0.012     -0.001      0.050     -0.027     -0.041
+    -0.186     -0.219      0.173      0.149     -0.121      0.138     -0.101      0.075      0.188     -0.586     -0.082     -0.311      0.003      0.003      0.003      0.000      0.014     -0.002     -0.001      0.002     -0.027      0.013      0.005
+    -0.257     -0.279      0.153      0.222     -0.213      0.219      0.054      0.132     -0.044     -0.106     -0.255     -0.034      0.199      0.065      0.008      0.005      0.061      0.000      0.027      0.002      0.012     -0.015     -0.030
+    -0.076     -0.329      0.157      0.256     -0.112     -0.166      0.026      0.050      0.123     -0.156      0.054     -0.229      0.227      0.139      0.046     -0.012      0.089     -0.049     -0.044      0.011     -0.279      0.141      0.174
+    -0.168     -0.246      0.021     -0.006     -0.083      0.231     -0.040      0.124     -0.008      0.157     -0.031      0.087      0.015      0.097     -0.257      0.044      0.158      0.043      0.035     -0.017      0.201     -0.099     -0.145
+    -0.288     -0.536      0.127      0.127     -0.140      0.154      0.040      0.136      0.060     -0.044     -0.057      0.000      0.206      0.205      0.358      0.647      1.346      0.091      0.162     -0.079      0.225     -0.122     -0.317
+     0.048     -0.003     -0.083     -0.073     -0.038      0.183      0.188      0.039     -0.064      0.116     -0.138      0.225     -0.062      0.003     -0.416      0.374      0.142      0.305      0.183     -0.055      0.928     -0.475     -0.591
+    -0.094     -0.217      0.111      0.133     -0.166      0.147      0.025     -0.061      0.041     -0.018     -0.097      0.197     -0.013      0.095     -0.182      0.149      0.125      0.297      1.236     -0.198      1.156     -0.840     -0.897
+    -0.159      0.025      0.178      0.101     -0.128      0.023     -0.022     -0.120     -0.012     -0.207     -0.041     -0.036      0.077      0.021      0.125     -0.201     -0.173     -0.256     -0.454      0.154     -0.207      0.108     -0.099
+    -0.117      0.019      0.026      0.007     -0.181      0.154      0.274     -0.078     -0.124      0.246     -0.175      0.358     -0.181      0.019     -0.515      0.378      0.077      0.667      0.413     -0.209      6.357     -3.347     -4.255
+     0.162      0.047     -0.080     -0.074      0.235     -0.184     -0.253      0.090      0.106     -0.191      0.186     -0.360      0.159     -0.045      0.484     -0.347     -0.077     -0.633     -0.556      0.203     -0.977      1.847      2.305
+     0.205      0.081     -0.168     -0.085      0.265     -0.158     -0.225      0.138      0.079     -0.077      0.187     -0.367      0.045     -0.058      0.400     -0.341     -0.135     -0.528     -0.398     -0.124     -0.833      0.837      4.107
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 93.58 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 08/06/2017 20:34:58
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 509966.
+Effects object used: myCoEvolutionEff 
+Model Type 1: Standard actor-oriented model
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                 5.4847
+  2. eval:  outdegree (density)                            -1.5294
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  3-cycles                                        0.0000
+  6. eval:  agr_self_1 alter                                0.0000
+  7. eval:  agr_self_1 ego                                  0.0000
+  8. eval:  agr_self_1 similarity                           0.0000
+  9. eval:  music_1 alter                                   0.0000
+ 10. eval:  music_1 ego                                     0.0000
+ 11. eval:  music_1 similarity                              0.0000
+ 12. eval:  music_2 alter                                   0.0000
+ 13. eval:  music_2 ego                                     0.0000
+ 14. eval:  music_2 similarity                              0.0000
+ 15. eval:  agr_act_beh alter                               0.0000
+ 16. eval:  agr_act_beh ego                                 0.0000
+ 17. eval:  agr_act_beh similarity                          0.0000
+ 18. rate:  rate agr_act_beh period 1                       0.7146
+ 19. eval:  behavior agr_act_beh linear shape              -0.3921
+ 20. eval:  behavior agr_act_beh quadratic shape            0.0000
+ 21. eval:  behavior agr_act_beh average alter              0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           244.0000
+  2. Number of ties                                                     286.0000
+  3. Number of reciprocated ties                                        196.0000
+  4. Number of transitive triplets                                      453.0000
+  5. 3-cycles                                                           129.0000
+  6. Sum of indegrees x agr_self_1                                       55.0222
+  7. Sum of outdegrees x agr_self_1                                      25.0222
+  8. Similarity on agr_self_1                                            -3.8999
+  9. Sum of indegrees x music_1                                         -52.4667
+ 10. Sum of outdegrees x music_1                                        -14.4667
+ 11. Similarity on music_1                                               -5.4801
+ 12. Sum of indegrees x music_2                                         -55.4222
+ 13. Sum of outdegrees x music_2                                        -17.4222
+ 14. Similarity on music_2                                                7.4169
+ 15. Sum of indegrees x agr_act_beh                                      30.0000
+ 16. Sum of outdegrees x agr_act_beh                                     17.0000
+ 17. Similarity on agr_act_beh                                            9.3728
+ 18. Amount of behavioral change                                         46.0000
+ 19. beh. agr_act_beh cent. sum                                         -12.0000
+ 20. beh. agr_act_beh sum of cent. squares                               62.5000
+ 21. beh. agr_act_beh average alters                                     10.2119
+
+ 21 parameters, 21 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 3825 iterations.
+Parameter estimates based on 2825 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -0.1200  14.7010  -0.0082 
+  2.  -1.3780  22.5607  -0.0611 
+  3.  -0.9780  19.1637  -0.0510 
+  4.  -3.0200 103.5391  -0.0292 
+  5.  -0.9390  30.2326  -0.0311 
+  6.  -0.0053  24.8748  -0.0002 
+  7.  -0.5313  22.2895  -0.0238 
+  8.   0.0853   3.7326   0.0228 
+  9.   0.3941  21.0313   0.0187 
+ 10.  -0.5009  21.5643  -0.0232 
+ 11.  -0.0965   4.1646  -0.0232 
+ 12.   0.7755  23.2267   0.0334 
+ 13.   0.3005  24.3504   0.0123 
+ 14.  -0.1036   4.5733  -0.0227 
+ 15.  -0.7240  14.3932  -0.0503 
+ 16.  -0.4930  13.7711  -0.0358 
+ 17.   0.1417   3.3542   0.0422 
+ 18.  -0.1890   4.7835  -0.0395 
+ 19.   0.4030   7.3601   0.0548 
+ 20.   1.0380  19.9944   0.0519 
+ 21.  -0.6009  11.3083  -0.0531 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 3825 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship               7.4524  (   0.9045)
+ 2. eval:  outdegree (density)                          -3.0852  (   0.1597)
+ 3. eval:  reciprocity                                   2.9261  (   0.2710)
+ 4. eval:  transitive triplets                           0.8262  (   0.0907)
+ 5. eval:  3-cycles                                     -0.8297  (   0.1883)
+ 6. eval:  agr_self_1 alter                              0.0507  (   0.0545)
+ 7. eval:  agr_self_1 ego                               -0.0264  (   0.0591)
+ 8. eval:  agr_self_1 similarity                        -0.2351  (   0.3400)
+ 9. eval:  music_1 alter                                -0.0952  (   0.0597)
+10. eval:  music_1 ego                                  -0.0753  (   0.0611)
+11. eval:  music_1 similarity                           -0.5130  (   0.2730)
+12. eval:  music_2 alter                                -0.0130  (   0.0513)
+13. eval:  music_2 ego                                   0.0721  (   0.0594)
+14. eval:  music_2 similarity                            0.2345  (   0.2662)
+15. eval:  agr_act_beh alter                             0.2065  (   0.2132)
+16. eval:  agr_act_beh ego                               0.0221  (   0.2042)
+17. eval:  agr_act_beh similarity                        1.6421  (   1.2384)
+Behavior Dynamics
+
+18. rate:  rate agr_act_beh period 1                     2.7974  (   0.6950)
+19. eval:  behavior agr_act_beh linear shape            -1.7577  (   0.3595)
+20. eval:  behavior agr_act_beh quadratic shape          0.1861  (   0.1252)
+21. eval:  behavior agr_act_beh average alter            0.7171  (   0.4573)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.818      0.036     -0.049     -0.010      0.030     -0.001     -0.005      0.051      0.005      0.002     -0.006      0.007     -0.010     -0.014     -0.020      0.017     -0.161     -0.097      0.028      0.017     -0.098
+     0.246      0.026     -0.027     -0.008      0.012      0.000      0.000      0.007      0.001      0.002      0.000      0.001     -0.002     -0.005     -0.009     -0.003     -0.091     -0.022     -0.004      0.002     -0.010
+    -0.200     -0.624      0.073      0.015     -0.037      0.001      0.000     -0.013     -0.002     -0.002      0.009     -0.002      0.004      0.007     -0.002     -0.011     -0.029      0.059      0.008      0.001      0.002
+    -0.126     -0.551      0.602      0.008     -0.014      0.000      0.000     -0.001      0.000     -0.001      0.002      0.000      0.001      0.002      0.002     -0.005     -0.008      0.013      0.002      0.000      0.002
+     0.176      0.397     -0.731     -0.831      0.035     -0.001     -0.001      0.003      0.001      0.001     -0.009      0.000     -0.002     -0.001      0.001      0.008      0.030     -0.040     -0.007      0.001     -0.005
+    -0.025     -0.045      0.092     -0.011     -0.096      0.003      0.000      0.007      0.000      0.000      0.002      0.000      0.000      0.001     -0.004      0.002     -0.003      0.003      0.000      0.000      0.002
+    -0.098      0.038     -0.014      0.091     -0.066     -0.137      0.003      0.004      0.001      0.000      0.002      0.000      0.000      0.000      0.003     -0.005     -0.008     -0.004      0.002     -0.001      0.002
+     0.164      0.135     -0.137     -0.021      0.052      0.384      0.190      0.116      0.003      0.002      0.007      0.002      0.001      0.008      0.001      0.003     -0.026     -0.039     -0.005      0.001      0.001
+     0.085      0.129     -0.103     -0.031      0.049     -0.027      0.149      0.144      0.004      0.000      0.002     -0.001      0.001      0.001      0.003     -0.002     -0.002     -0.013      0.002     -0.001      0.000
+     0.028      0.168     -0.131     -0.171      0.071      0.093     -0.016      0.098     -0.123      0.004      0.002      0.000     -0.002     -0.001     -0.002      0.003     -0.001      0.001     -0.002      0.000      0.000
+    -0.025     -0.002      0.123      0.071     -0.169      0.157      0.111      0.075      0.112      0.093      0.075      0.000      0.001     -0.014      0.001     -0.006     -0.012      0.012      0.001     -0.002      0.009
+     0.153      0.120     -0.171     -0.035      0.049     -0.025     -0.055      0.091     -0.376      0.128     -0.002      0.003     -0.001     -0.002     -0.001      0.002      0.006     -0.005     -0.001      0.000     -0.001
+    -0.178     -0.246      0.259      0.215     -0.138     -0.040      0.088      0.040      0.165     -0.562      0.090     -0.232      0.004      0.003      0.002     -0.003     -0.003      0.003      0.001      0.000      0.000
+    -0.058     -0.113      0.093      0.093     -0.014      0.100      0.000      0.092      0.055     -0.076     -0.193     -0.145      0.206      0.071     -0.008      0.000     -0.037     -0.005     -0.006      0.002      0.005
+    -0.102     -0.271     -0.034      0.110      0.036     -0.312      0.215      0.020      0.250     -0.124      0.012     -0.048      0.162     -0.133      0.045     -0.006      0.153     -0.033      0.010     -0.007      0.002
+     0.091     -0.096     -0.206     -0.251      0.213      0.143     -0.431      0.044     -0.146      0.249     -0.110      0.182     -0.276      0.001     -0.145      0.042      0.135     -0.004     -0.013      0.001     -0.005
+    -0.144     -0.458     -0.086     -0.071      0.131     -0.048     -0.114     -0.062     -0.032     -0.010     -0.034      0.089     -0.036     -0.114      0.579      0.534      1.534     -0.087      0.028     -0.040      0.048
+    -0.155     -0.196      0.313      0.211     -0.306      0.089     -0.091     -0.166     -0.306      0.027      0.063     -0.144      0.066     -0.026     -0.223     -0.031     -0.101      0.483      0.024      0.000      0.002
+     0.087     -0.076      0.081      0.068     -0.101      0.005      0.090     -0.043      0.088     -0.081      0.013     -0.052      0.027     -0.063      0.128     -0.178      0.063      0.097      0.129     -0.025     -0.047
+     0.147      0.107      0.039     -0.007      0.049     -0.021     -0.117      0.022     -0.094      0.055     -0.044      0.020     -0.016      0.061     -0.244      0.049     -0.261      0.000     -0.559      0.016     -0.018
+    -0.236     -0.132      0.014      0.045     -0.056      0.065      0.092      0.006     -0.007      0.015      0.072     -0.053     -0.004      0.040      0.023     -0.056      0.085      0.006     -0.285     -0.312      0.209
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 86.38 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 08/06/2017 21:09:37
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 419137.
+Effects object used: myCoEvolutionEff 
+Model Type 1: Standard actor-oriented model
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                 5.4847
+  2. eval:  outdegree (density)                            -1.5294
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  3-cycles                                        0.0000
+  6. eval:  agr_self_1 alter                                0.0000
+  7. eval:  agr_self_1 ego                                  0.0000
+  8. eval:  agr_self_1 similarity                           0.0000
+  9. eval:  music_1 alter                                   0.0000
+ 10. eval:  music_1 ego                                     0.0000
+ 11. eval:  music_1 similarity                              0.0000
+ 12. eval:  same music_1 x reciprocity                      0.0000
+ 13. eval:  music_2 alter                                   0.0000
+ 14. eval:  music_2 ego                                     0.0000
+ 15. eval:  music_2 similarity                              0.0000
+ 16. eval:  same music_2 x reciprocity                      0.0000
+ 17. eval:  agr_act_beh alter                               0.0000
+ 18. eval:  agr_act_beh ego                                 0.0000
+ 19. eval:  agr_act_beh similarity                          0.0000
+ 20. eval:  same agr_act_beh x reciprocity                  0.0000
+ 21. rate:  rate agr_act_beh period 1                       0.7146
+ 22. eval:  behavior agr_act_beh linear shape              -0.3921
+ 23. eval:  behavior agr_act_beh quadratic shape            0.0000
+ 24. eval:  behavior agr_act_beh indegree                   0.0000
+ 25. eval:  behavior agr_act_beh outdegree                  0.0000
+ 26. eval:  behavior agr_act_beh average alter              0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           244.0000
+  2. Number of ties                                                     286.0000
+  3. Number of reciprocated ties                                        196.0000
+  4. Number of transitive triplets                                      453.0000
+  5. 3-cycles                                                           129.0000
+  6. Sum of indegrees x agr_self_1                                       55.0222
+  7. Sum of outdegrees x agr_self_1                                      25.0222
+  8. Similarity on agr_self_1                                            -3.8999
+  9. Sum of indegrees x music_1                                         -52.4667
+ 10. Sum of outdegrees x music_1                                        -14.4667
+ 11. Similarity on music_1                                               -5.4801
+ 12. Same values x reciprocity on music_1                                38.0000
+ 13. Sum of indegrees x music_2                                         -55.4222
+ 14. Sum of outdegrees x music_2                                        -17.4222
+ 15. Similarity on music_2                                                7.4169
+ 16. Same values x reciprocity on music_2                                52.0000
+ 17. Sum of indegrees x agr_act_beh                                      30.0000
+ 18. Sum of outdegrees x agr_act_beh                                     17.0000
+ 19. Similarity on agr_act_beh                                            9.3728
+ 20. Same values x reciprocity on agr_act_beh                           104.0000
+ 21. Amount of behavioral change                                         46.0000
+ 22. beh. agr_act_beh cent. sum                                         -12.0000
+ 23. beh. agr_act_beh sum of cent. squares                               62.5000
+ 24. beh. agr_act_beh indegrees                                         -64.0000
+ 25. beh. agr_act_beh outdegrees                                        -53.0000
+ 26. beh. agr_act_beh average alters                                     10.2119
+
+ 26 parameters, 26 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 4398 iterations.
+Parameter estimates based on 3398 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.  -0.6860  15.1254  -0.0454 
+  2.  -0.5300  23.0750  -0.0230 
+  3.  -0.1080  19.8086  -0.0055 
+  4.  -3.0810 102.9996  -0.0299 
+  5.  -0.8500  30.0801  -0.0283 
+  6.  -0.4741  24.6029  -0.0193 
+  7.  -0.8291  23.3306  -0.0355 
+  8.   0.2464   3.9731   0.0620 
+  9.   0.2303  21.4648   0.0107 
+ 10.   0.3693  22.2944   0.0166 
+ 11.   0.1011   4.3662   0.0232 
+ 12.  -0.2420   6.8434  -0.0354 
+ 13.  -0.6079  22.4482  -0.0271 
+ 14.  -0.5669  25.0079  -0.0227 
+ 15.   0.0458   4.4837   0.0102 
+ 16.   0.2280   7.0607   0.0323 
+ 17.  -0.1760  15.2526  -0.0115 
+ 18.   0.4610  14.2637   0.0323 
+ 19.  -0.0506   3.5977  -0.0141 
+ 20.  -0.0880  12.3168  -0.0071 
+ 21.  -0.0710   5.0659  -0.0140 
+ 22.   0.2490   7.4084   0.0336 
+ 23.   0.2460  18.5075   0.0133 
+ 24.   1.8180  19.1779   0.0948 
+ 25.  -0.4690  22.9079  -0.0205 
+ 26.   0.3007   9.7111   0.0310 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 4398 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship               7.4488  (   0.7725)
+ 2. eval:  outdegree (density)                          -3.0448  (   0.1464)
+ 3. eval:  reciprocity                                   2.3229  (   0.6554)
+ 4. eval:  transitive triplets                           0.8267  (   0.0893)
+ 5. eval:  3-cycles                                     -0.8172  (   0.1719)
+ 6. eval:  agr_self_1 alter                              0.0525  (   0.0696)
+ 7. eval:  agr_self_1 ego                               -0.0232  (   0.0499)
+ 8. eval:  agr_self_1 similarity                        -0.2208  (   0.3417)
+ 9. eval:  music_1 alter                                -0.1025  (   0.0569)
+10. eval:  music_1 ego                                  -0.0771  (   0.0653)
+11. eval:  music_1 similarity                           -0.4786  (   0.2937)
+12. eval:  same music_1 x reciprocity                   -0.0608  (   0.3964)
+13. eval:  music_2 alter                                -0.0097  (   0.0718)
+14. eval:  music_2 ego                                   0.0707  (   0.0642)
+15. eval:  music_2 similarity                            0.0417  (   0.3265)
+16. eval:  same music_2 x reciprocity                    0.5333  (   0.4451)
+17. eval:  agr_act_beh alter                             0.2003  (   0.2157)
+18. eval:  agr_act_beh ego                               0.0870  (   0.2221)
+19. eval:  agr_act_beh similarity                        1.2270  (   1.0392)
+20. eval:  same agr_act_beh x reciprocity                0.7330  (   0.8231)
+Behavior Dynamics
+
+21. rate:  rate agr_act_beh period 1                     2.1891  (   1.2193)
+22. eval:  behavior agr_act_beh linear shape            -1.2771  (   1.0943)
+23. eval:  behavior agr_act_beh quadratic shape          0.1518  (   0.4117)
+24. eval:  behavior agr_act_beh indegree                -1.4704  (   5.6106)
+25. eval:  behavior agr_act_beh outdegree                0.7877  (   2.8597)
+26. eval:  behavior agr_act_beh average alter            1.4773  (   5.0869)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.597      0.015      0.007     -0.013      0.022     -0.008     -0.002      0.040     -0.003      0.007     -0.002      0.011      0.000     -0.009     -0.020      0.003     -0.008      0.013     -0.005     -0.060     -0.109     -0.157     -0.072     -0.529      0.292      0.553
+     0.129      0.021     -0.048     -0.008      0.011      0.001      0.000     -0.008      0.000      0.002     -0.004      0.005      0.003      0.000      0.005     -0.006     -0.011      0.006     -0.055      0.034      0.063      0.024      0.015      0.319     -0.161     -0.282
+     0.014     -0.503      0.430      0.013     -0.039     -0.007     -0.003      0.053     -0.001     -0.004      0.030     -0.041     -0.011     -0.004      0.030     -0.063      0.015     -0.066      0.171     -0.482     -0.253     -0.119     -0.073     -1.308      0.694      1.269
+    -0.194     -0.583      0.221      0.008     -0.013      0.000      0.000      0.002      0.000     -0.001      0.002     -0.001     -0.001      0.000     -0.002      0.003      0.003     -0.004     -0.003     -0.001     -0.017     -0.008     -0.001     -0.071      0.035      0.077
+     0.165      0.440     -0.347     -0.837      0.030      0.001     -0.001     -0.004     -0.001      0.002     -0.006      0.001      0.001      0.001      0.001      0.001     -0.003      0.008      0.013      0.014      0.036      0.011      0.004      0.151     -0.074     -0.159
+    -0.148      0.145     -0.143     -0.074      0.046      0.005      0.000      0.004      0.000      0.000     -0.001      0.004      0.002      0.002      0.003     -0.004     -0.007      0.006      0.005      0.002      0.054      0.031      0.012      0.250     -0.127     -0.230
+    -0.040     -0.036     -0.081      0.104     -0.106     -0.026      0.002      0.005      0.000      0.000      0.001      0.000      0.000      0.000     -0.001      0.002      0.001     -0.001     -0.004      0.005     -0.009     -0.002      0.000     -0.030      0.014      0.023
+     0.153     -0.151      0.236      0.054     -0.061      0.185      0.270      0.117      0.000     -0.001      0.003     -0.005     -0.003     -0.002     -0.003      0.000      0.008     -0.011      0.028     -0.060     -0.102     -0.083     -0.020     -0.429      0.231      0.432
+    -0.062      0.045     -0.032      0.046     -0.092     -0.046      0.045      0.004      0.003      0.000      0.002      0.000     -0.002      0.000     -0.001      0.001      0.002     -0.001     -0.006      0.005     -0.013     -0.004     -0.001     -0.058      0.029      0.041
+     0.134      0.177     -0.094     -0.217      0.138      0.017      0.002     -0.055     -0.122      0.004      0.002      0.004      0.001     -0.001      0.002     -0.002     -0.001      0.005      0.010     -0.001      0.012      0.007     -0.002      0.045     -0.022     -0.037
+    -0.011     -0.081      0.155      0.071     -0.119     -0.039      0.076      0.029      0.111      0.122      0.086     -0.051     -0.001     -0.001     -0.020      0.018      0.004     -0.001      0.009     -0.010     -0.045     -0.011     -0.030     -0.282      0.143      0.256
+     0.034      0.079     -0.160     -0.019      0.020      0.128     -0.011     -0.039     -0.010      0.150     -0.437      0.157      0.005      0.003      0.018     -0.038     -0.016      0.016      0.019     -0.005      0.094      0.039      0.027      0.551     -0.275     -0.460
+    -0.001      0.327     -0.226     -0.082      0.080      0.489     -0.036     -0.123     -0.421      0.142     -0.058      0.184      0.005      0.002      0.005     -0.005     -0.008      0.006      0.001      0.003      0.062      0.032      0.011      0.284     -0.144     -0.248
+    -0.173      0.050     -0.084     -0.018      0.082      0.368     -0.043     -0.103     -0.075     -0.352     -0.069      0.106      0.348      0.004      0.005     -0.004     -0.004      0.003      0.002      0.001      0.042      0.024      0.009      0.201     -0.103     -0.178
+    -0.079      0.113      0.142     -0.057      0.016      0.139     -0.069     -0.025     -0.073      0.109     -0.211      0.138      0.198      0.224      0.107     -0.083     -0.015      0.004     -0.013     -0.053      0.108      0.063      0.013      0.471     -0.235     -0.397
+     0.009     -0.091     -0.214      0.066      0.008     -0.134      0.079      0.002      0.051     -0.068      0.140     -0.213     -0.155     -0.151     -0.569      0.198      0.024     -0.002      0.050      0.073     -0.107     -0.088     -0.022     -0.592      0.306      0.489
+    -0.046     -0.352      0.109      0.158     -0.079     -0.488      0.094      0.109      0.174     -0.088      0.060     -0.186     -0.495     -0.309     -0.220      0.252      0.047     -0.019      0.077      0.003     -0.146     -0.091     -0.018     -0.723      0.367      0.626
+     0.075      0.181     -0.451     -0.211      0.221      0.390     -0.133     -0.142     -0.079      0.342     -0.011      0.187      0.386      0.175      0.056     -0.016     -0.386      0.049      0.070      0.055      0.158      0.086      0.019      0.682     -0.347     -0.656
+    -0.007     -0.361      0.252     -0.033      0.075      0.069     -0.083      0.078     -0.097      0.146      0.029      0.047      0.008      0.037     -0.039      0.107      0.342      0.304      1.080     -0.344      0.131      0.057     -0.006      0.313     -0.130     -0.309
+    -0.094      0.285     -0.894     -0.016      0.101      0.034      0.113     -0.214      0.102     -0.011     -0.041     -0.016      0.051      0.013     -0.197      0.200      0.016      0.298     -0.402      0.678      0.109      0.067      0.061      0.655     -0.384     -0.747
+    -0.116      0.352     -0.316     -0.157      0.171      0.630     -0.153     -0.244     -0.188      0.146     -0.126      0.194      0.708      0.537      0.272     -0.198     -0.556      0.583      0.103      0.108      1.487      0.677      0.263      6.375     -3.229     -5.669
+    -0.186      0.147     -0.165     -0.083      0.057      0.410     -0.041     -0.221     -0.064      0.104     -0.036      0.089      0.404      0.348      0.176     -0.180     -0.386      0.354      0.050      0.075      0.508      1.198      0.061      3.021     -1.725     -3.168
+    -0.227      0.245     -0.271     -0.033      0.062      0.408     -0.010     -0.140     -0.042     -0.076     -0.248      0.167      0.356      0.323      0.099     -0.119     -0.203      0.203     -0.015      0.179      0.523      0.135      0.169      1.444     -0.742     -1.382
+    -0.122      0.388     -0.356     -0.142      0.157      0.640     -0.106     -0.224     -0.182      0.123     -0.171      0.248      0.706      0.559      0.257     -0.237     -0.597      0.547      0.054      0.142      0.932      0.492      0.625     31.479    -15.978    -27.699
+     0.132     -0.384      0.370      0.136     -0.151     -0.640      0.095      0.236      0.176     -0.119      0.170     -0.243     -0.702     -0.561     -0.251      0.240      0.594     -0.546     -0.044     -0.163     -0.926     -0.551     -0.630     -0.996      8.178     14.154
+     0.141     -0.378      0.381      0.170     -0.181     -0.649      0.091      0.249      0.143     -0.113      0.171     -0.228     -0.679     -0.546     -0.239      0.216      0.571     -0.581     -0.058     -0.179     -0.914     -0.569     -0.660     -0.971      0.973     25.877
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 104.06 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 08/06/2017 21:17:23
+New results follow.
+-----------------------------------
+
+Siena version 1.1-232 (18 Jun 13)
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 923109.
+Effects object used: myCoEvolutionEff 
+Model Type 1: Standard actor-oriented model
+Estimation method: unconditional moment estimation.
+
+Time duration for simulations is 1.0.
+Standard errors are estimated with the likelihood ratio method.
+Initial value of gain parameter is  0.2000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  1. rate:  basic rate parameter friendship                 5.4847
+  2. eval:  outdegree (density)                            -1.5294
+  3. eval:  reciprocity                                     0.0000
+  4. eval:  transitive triplets                             0.0000
+  5. eval:  3-cycles                                        0.0000
+  6. eval:  agr_self_1 alter                                0.0000
+  7. eval:  agr_self_1 ego                                  0.0000
+  8. eval:  agr_self_1 similarity                           0.0000
+  9. eval:  music_1 alter                                   0.0000
+ 10. eval:  music_1 ego                                     0.0000
+ 11. eval:  music_1 similarity                              0.0000
+ 12. eval:  same music_1 x reciprocity                      0.0000
+ 13. eval:  music_2 alter                                   0.0000
+ 14. eval:  music_2 ego                                     0.0000
+ 15. eval:  music_2 similarity                              0.0000
+ 16. eval:  same music_2 x reciprocity                      0.0000
+ 17. eval:  agr_act_beh alter                               0.0000
+ 18. eval:  agr_act_beh ego                                 0.0000
+ 19. eval:  agr_act_beh similarity                          0.0000
+ 20. eval:  same agr_act_beh x reciprocity                  0.0000
+ 21. rate:  rate agr_act_beh period 1                       0.7146
+ 22. eval:  behavior agr_act_beh linear shape              -0.3921
+ 23. eval:  behavior agr_act_beh quadratic shape            0.0000
+ 24. eval:  behavior agr_act_beh indegree                   0.0000
+ 25. eval:  behavior agr_act_beh outdegree                  0.0000
+ 26. eval:  behavior agr_act_beh average alter              0.0000
+
+
+Observed values of target statistics are
+  1. Amount of network change                                           244.0000
+  2. Number of ties                                                     286.0000
+  3. Number of reciprocated ties                                        196.0000
+  4. Number of transitive triplets                                      453.0000
+  5. 3-cycles                                                           129.0000
+  6. Sum of indegrees x agr_self_1                                       55.0222
+  7. Sum of outdegrees x agr_self_1                                      25.0222
+  8. Similarity on agr_self_1                                            -3.8999
+  9. Sum of indegrees x music_1                                         -52.4667
+ 10. Sum of outdegrees x music_1                                        -14.4667
+ 11. Similarity on music_1                                               -5.4801
+ 12. Same values x reciprocity on music_1                                38.0000
+ 13. Sum of indegrees x music_2                                         -55.4222
+ 14. Sum of outdegrees x music_2                                        -17.4222
+ 15. Similarity on music_2                                                7.4169
+ 16. Same values x reciprocity on music_2                                52.0000
+ 17. Sum of indegrees x agr_act_beh                                      30.0000
+ 18. Sum of outdegrees x agr_act_beh                                     17.0000
+ 19. Similarity on agr_act_beh                                            9.3728
+ 20. Same values x reciprocity on agr_act_beh                           104.0000
+ 21. Amount of behavioral change                                         46.0000
+ 22. beh. agr_act_beh cent. sum                                         -12.0000
+ 23. beh. agr_act_beh sum of cent. squares                               62.5000
+ 24. beh. agr_act_beh indegrees                                         -64.0000
+ 25. beh. agr_act_beh outdegrees                                        -53.0000
+ 26. beh. agr_act_beh average alters                                     10.2119
+
+ 26 parameters, 26 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 4001 iterations.
+Parameter estimates based on 3001 iterations,
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.6440  14.6928   0.0438 
+  2.  -0.4000  22.4975  -0.0178 
+  3.  -0.4380  19.3584  -0.0226 
+  4.  -2.1660 100.8243  -0.0215 
+  5.  -1.1970  29.6841  -0.0403 
+  6.  -1.0856  25.0992  -0.0433 
+  7.   0.4934  23.7339   0.0208 
+  8.   0.0632   3.9186   0.0161 
+  9.  -0.3443  21.1222  -0.0163 
+ 10.  -0.8643  22.2785  -0.0388 
+ 11.  -0.2152   4.1807  -0.0515 
+ 12.  -0.2880   6.4571  -0.0446 
+ 13.  -0.4184  22.9704  -0.0182 
+ 14.  -1.5424  23.8646  -0.0646 
+ 15.  -0.1200   4.6593  -0.0258 
+ 16.  -0.3980   7.2968  -0.0545 
+ 17.  -0.0320  14.7364  -0.0022 
+ 18.  -0.2410  13.6325  -0.0177 
+ 19.  -0.1155   3.3686  -0.0343 
+ 20.  -0.0940  12.2834  -0.0077 
+ 21.  -0.1850   5.0482  -0.0366 
+ 22.  -0.1870   6.9604  -0.0269 
+ 23.  -0.2280  17.6555  -0.0129 
+ 24.   1.1250  18.1518   0.0620 
+ 25.  -2.5100  21.4073  -0.1172 
+ 26.  -0.4149   8.9562  -0.0463 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 4001 iteration steps.
+
+@3
+Estimates and standard errors
+                             
+Network Dynamics
+ 1. rate:  basic rate parameter friendship               7.5190  (   1.2774)
+ 2. eval:  outdegree (density)                          -3.0388  (   0.1522)
+ 3. eval:  reciprocity                                   2.2930  (   0.6965)
+ 4. eval:  transitive triplets                           0.8268  (   0.0946)
+ 5. eval:  3-cycles                                     -0.8163  (   0.1884)
+ 6. eval:  agr_self_1 alter                              0.0495  (   0.0551)
+ 7. eval:  agr_self_1 ego                               -0.0191  (   0.0521)
+ 8. eval:  agr_self_1 similarity                        -0.2251  (   0.3391)
+ 9. eval:  music_1 alter                                -0.1014  (   0.0730)
+10. eval:  music_1 ego                                  -0.0790  (   0.0614)
+11. eval:  music_1 similarity                           -0.4823  (   0.3173)
+12. eval:  same music_1 x reciprocity                   -0.0501  (   0.4235)
+13. eval:  music_2 alter                                -0.0104  (   0.0569)
+14. eval:  music_2 ego                                   0.0706  (   0.0566)
+15. eval:  music_2 similarity                            0.0445  (   0.2826)
+16. eval:  same music_2 x reciprocity                    0.5115  (   0.4141)
+17. eval:  agr_act_beh alter                             0.2043  (   0.2270)
+18. eval:  agr_act_beh ego                               0.0848  (   0.2228)
+19. eval:  agr_act_beh similarity                        1.1968  (   1.4338)
+20. eval:  same agr_act_beh x reciprocity                0.7708  (   0.9035)
+Behavior Dynamics
+
+21. rate:  rate agr_act_beh period 1                     2.2559  (   0.7328)
+22. eval:  behavior agr_act_beh linear shape            -1.2923  (   0.8190)
+23. eval:  behavior agr_act_beh quadratic shape          0.1794  (   0.2719)
+24. eval:  behavior agr_act_beh indegree                -1.2293  (   1.5418)
+25. eval:  behavior agr_act_beh outdegree                0.6579  (   0.8015)
+26. eval:  behavior agr_act_beh average alter            1.2924  (   1.3603)
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     1.632      0.051      0.257     -0.028      0.032     -0.013      0.009      0.021      0.020      0.014      0.062     -0.043     -0.003     -0.001      0.005     -0.067     -0.044     -0.084     -0.416     -0.387     -0.328      0.124     -0.013     -0.693      0.329      0.497
+     0.260      0.023     -0.025     -0.009      0.011     -0.001     -0.001      0.000      0.004      0.000      0.002     -0.003     -0.002     -0.001     -0.003      0.000     -0.012     -0.004     -0.093      0.012     -0.006      0.000      0.001      0.013     -0.007      0.013
+     0.289     -0.235      0.485      0.010     -0.046      0.002      0.006      0.049      0.004      0.011      0.022     -0.072      0.004      0.000      0.021     -0.068     -0.021     -0.090     -0.039     -0.569     -0.118      0.185     -0.018     -0.226      0.102      0.068
+    -0.230     -0.622      0.152      0.009     -0.015      0.000      0.000     -0.001     -0.001      0.000     -0.002      0.005      0.001      0.000      0.003     -0.004      0.000     -0.001      0.008      0.002     -0.007      0.003     -0.002     -0.016      0.009      0.004
+     0.133      0.397     -0.353     -0.817      0.035     -0.002     -0.001     -0.002      0.000     -0.001      0.000     -0.003     -0.001      0.000     -0.003      0.008      0.010      0.009      0.046      0.016      0.017     -0.022      0.003      0.021     -0.010      0.004
+    -0.187     -0.103      0.059      0.081     -0.168      0.003      0.000      0.009      0.000      0.000     -0.002      0.003      0.000      0.000      0.001     -0.001     -0.002      0.000     -0.004      0.000      0.005      0.008     -0.002      0.004     -0.004     -0.003
+     0.131     -0.068      0.165      0.075     -0.105      0.003      0.003      0.005      0.000      0.001      0.002     -0.001      0.000      0.000      0.000      0.000      0.000     -0.003     -0.004     -0.007     -0.006      0.000      0.001     -0.007      0.003      0.003
+     0.049      0.004      0.207     -0.035     -0.027      0.470      0.304      0.115      0.005      0.000      0.002     -0.011     -0.001     -0.002      0.002     -0.003      0.000     -0.009      0.012     -0.067      0.016      0.053      0.002      0.064     -0.045     -0.057
+     0.210      0.377      0.084     -0.149     -0.010      0.017      0.044      0.217      0.005      0.000      0.002     -0.006     -0.002      0.000     -0.003      0.002     -0.002     -0.003     -0.026     -0.007      0.004      0.006      0.002      0.022     -0.013     -0.013
+     0.184      0.015      0.266      0.001     -0.073     -0.057      0.205      0.001     -0.018      0.004      0.004     -0.001      0.001     -0.001      0.002     -0.005      0.000     -0.004     -0.012     -0.013     -0.013      0.002      0.000     -0.029      0.014      0.019
+     0.154      0.039      0.098     -0.066     -0.005     -0.121      0.149      0.022      0.076      0.230      0.101     -0.058     -0.001     -0.001     -0.020      0.011      0.011     -0.003      0.029     -0.012     -0.015      0.011      0.017      0.039     -0.024     -0.090
+    -0.080     -0.042     -0.243      0.117     -0.032      0.116     -0.052     -0.078     -0.183     -0.030     -0.435      0.179      0.005      0.000      0.027     -0.043     -0.015      0.008     -0.049      0.064     -0.015     -0.019     -0.016     -0.106      0.056      0.126
+    -0.044     -0.178      0.093      0.152     -0.066      0.095      0.071     -0.026     -0.539      0.152     -0.059      0.190      0.003     -0.001      0.003     -0.004      0.001      0.000      0.010     -0.006     -0.009      0.002     -0.003     -0.032      0.017      0.021
+    -0.014     -0.089     -0.010      0.084     -0.031     -0.084     -0.024     -0.082     -0.017     -0.384     -0.077      0.017     -0.183      0.003      0.002      0.001      0.000      0.000      0.002      0.002      0.001     -0.003      0.000      0.000      0.001     -0.002
+     0.014     -0.076      0.108      0.126     -0.060      0.055      0.026      0.026     -0.157      0.128     -0.226      0.227      0.171      0.112      0.080     -0.058      0.001     -0.001      0.019     -0.025     -0.025      0.014     -0.016     -0.136      0.069      0.124
+    -0.127     -0.005     -0.235     -0.092      0.100     -0.038     -0.019     -0.018      0.070     -0.197      0.085     -0.244     -0.164      0.052     -0.497      0.171      0.011      0.017      0.069      0.052      0.069     -0.013      0.030      0.196     -0.105     -0.214
+    -0.151     -0.347     -0.133      0.011      0.226     -0.180      0.021      0.003     -0.134     -0.006      0.156     -0.156      0.056      0.004      0.012      0.116      0.052      0.017      0.260      0.001      0.036     -0.035      0.003      0.040     -0.014     -0.036
+    -0.294     -0.112     -0.583     -0.041      0.212      0.000     -0.268     -0.113     -0.206     -0.297     -0.041      0.080     -0.033     -0.017     -0.021      0.187      0.332      0.050      0.178      0.103      0.057     -0.026     -0.010      0.105     -0.050     -0.053
+    -0.227     -0.424     -0.039      0.061      0.172     -0.048     -0.054      0.024     -0.253     -0.137      0.064     -0.080      0.122      0.019      0.046      0.117      0.798      0.557      2.056     -0.169      0.330     -0.089     -0.053      0.424     -0.182     -0.338
+    -0.335      0.087     -0.904      0.019      0.095      0.002     -0.142     -0.219     -0.109     -0.233     -0.041      0.167     -0.113      0.033     -0.100      0.140      0.006      0.510     -0.130      0.816      0.109     -0.209      0.029      0.270     -0.125     -0.119
+    -0.351     -0.050     -0.231     -0.100      0.123      0.120     -0.145      0.063      0.073     -0.290     -0.063     -0.047     -0.224      0.035     -0.123      0.227      0.217      0.349      0.314      0.165      0.537     -0.087      0.023      0.727     -0.367     -0.433
+     0.119     -0.001      0.324      0.041     -0.141      0.182      0.004      0.192      0.096      0.038      0.044     -0.056      0.042     -0.056      0.061     -0.039     -0.189     -0.141     -0.076     -0.282     -0.145      0.671     -0.067     -0.182     -0.040     -0.082
+    -0.038      0.032     -0.094     -0.081      0.063     -0.118      0.054      0.020      0.120     -0.017      0.194     -0.135     -0.180      0.008     -0.204      0.267      0.051     -0.172     -0.136      0.116      0.114     -0.303      0.074      0.090     -0.045     -0.177
+    -0.352      0.055     -0.211     -0.112      0.072      0.050     -0.087      0.122      0.193     -0.305      0.081     -0.163     -0.360      0.002     -0.311      0.307      0.115      0.307      0.192      0.194      0.644     -0.144      0.214      2.377     -1.192     -1.485
+     0.321     -0.059      0.183      0.118     -0.064     -0.084      0.079     -0.164     -0.219      0.294     -0.094      0.166      0.367      0.015      0.307     -0.315     -0.079     -0.278     -0.159     -0.173     -0.624     -0.061     -0.207     -0.964      0.642      0.777
+     0.286      0.063      0.072      0.034      0.015     -0.044      0.043     -0.125     -0.129      0.227     -0.209      0.219      0.277     -0.024      0.323     -0.381     -0.117     -0.176     -0.173     -0.097     -0.435     -0.073     -0.478     -0.708      0.713      1.850
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 95.44 seconds.
