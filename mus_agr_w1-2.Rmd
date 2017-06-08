@@ -139,6 +139,7 @@ summarySEwithin <- function(data=NULL, measurevar, betweenvars=NULL, withinvars=
 Friendship and gender
 
 ```{r}
+library(tidyr)
 
 students <- as.data.frame(agr_self$ID_student)
 students$V2 <- agr_self$ID_student
@@ -278,7 +279,7 @@ plot(g1,
      vertex.shape = ifelse(gender == 1, "square", "circle"),
      edge.width = 1,
      edge.arrow.size = 0.02,
-     vertex.size = 3,
+     vertex.size = 4,
      vertex.label = "",
      layout = myLayout,
      main = "Network wave 1")
@@ -287,7 +288,7 @@ plot(g2,
      vertex.shape = ifelse(gender == 1, "square", "circle"),
      edge.width = 1,
      edge.arrow.size = 0.02,
-     vertex.size = 3,
+     vertex.size = 4,
      vertex.label = "",
      layout = myLayout,
      main = "Network wave 2")
